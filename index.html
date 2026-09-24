@@ -1,0 +1,2354 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f8f6">
+  <title>车抵贷用户认知提升设计思路</title>
+  <style>
+    :root{--ink:#203332;--muted:#61706c;--line:#dce4df;--green:#256b5b;--pale:#eaf3ee;--paper:#f7f8f6;--orange:#b96835}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;line-height:1.65}
+    a{color:inherit;text-decoration:none}button{font:inherit}.wrap{max-width:980px;margin:auto;padding:0 28px}.top{position:sticky;top:0;z-index:10;background:#f7f8f6eb;backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}.top .wrap{display:flex;align-items:center;justify-content:space-between;min-height:58px;gap:20px}.brand{font-size:13px;font-weight:750;letter-spacing:.05em}.nav{display:flex;gap:22px;overflow:auto;white-space:nowrap;font-size:12px;color:var(--muted)}.nav a:hover{color:var(--green)}
+    .hero{padding:92px 0 64px;border-bottom:1px solid var(--line)}.eyebrow{display:inline-block;color:var(--green);font-weight:800;font-size:12px;letter-spacing:.12em}.hero h1{font-size:clamp(35px,5.8vw,65px);line-height:1.13;letter-spacing:-.055em;margin:17px 0 24px;max-width:800px}.hero p{max-width:700px;margin:0;color:var(--muted);font-size:18px}.meta{margin-top:38px;display:flex;gap:10px;flex-wrap:wrap}.chip{border:1px solid #d3dfd7;border-radius:999px;padding:6px 12px;color:#477166;background:#fff;font-size:12px}
+    section{scroll-margin-top:78px;padding:76px 0;border-bottom:1px solid var(--line)}.section-head{display:grid;grid-template-columns:140px 1fr;gap:20px;margin-bottom:32px}.index{color:var(--green);font-weight:800;font-size:13px}.section-head h2{font-size:clamp(26px,3.5vw,39px);line-height:1.22;margin:0 0 12px;letter-spacing:-.035em}.section-head p{margin:0;color:var(--muted);max-width:700px}.panel{background:#fff;border:1px solid var(--line);border-radius:17px;padding:27px}.panel+.panel{margin-top:12px}.caption{font-size:12px;color:var(--muted);margin:14px 0 0}.callout{padding:22px 25px;background:var(--pale);border-left:4px solid var(--green);font-weight:650;border-radius:0 10px 10px 0;margin-top:23px}
+    .flow{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.flow-card{position:relative;padding:22px;background:#fff;border:1px solid var(--line);border-radius:14px;min-height:185px}.flow-card .step{color:var(--green);font-size:11px;font-weight:800;letter-spacing:.08em}.flow-card h3{margin:9px 0 10px;font-size:20px}.flow-card p{margin:0;color:var(--muted);font-size:14px}.flow-card:not(:last-child):after{content:"→";position:absolute;right:-17px;top:50%;z-index:2;display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--green);color:#fff;font-size:13px}.branch{display:grid;grid-template-columns:1fr 1fr;gap:12px}.branch h3,.panel h3{margin:0 0 9px;font-size:18px}.branch p,.panel p{margin:0;color:var(--muted);font-size:14px}.label{display:inline-block;margin-bottom:13px;color:var(--orange);font-size:11px;font-weight:800;letter-spacing:.08em}.lines{display:grid;gap:0}.line{display:grid;grid-template-columns:155px 1fr;gap:16px;padding:17px 0;border-top:1px solid var(--line)}.line:first-child{border-top:0}.line b{font-size:14px}.line span{font-size:14px;color:var(--muted)}.journey{display:grid;grid-template-columns:40px 1fr;gap:16px}.journey+.journey{margin-top:22px}.round{width:32px;height:32px;display:grid;place-items:center;background:var(--pale);color:var(--green);border-radius:50%;font-size:13px;font-weight:800}.journey h3{margin:0 0 5px;font-size:16px}.journey p{margin:0;color:var(--muted);font-size:14px}.placeholder{min-height:130px;display:grid;place-items:center;text-align:center;padding:24px;border:1px dashed #b8c8bf;border-radius:13px;background:#f9fbf8;color:#718078;font-size:13px}.placeholder strong{display:block;color:#507466;font-size:14px;margin-bottom:4px}.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}.direction{display:grid;grid-template-columns:140px 1fr;gap:20px;border-top:1px solid var(--line);padding:24px 0}.direction b{color:var(--green);font-size:14px}.direction p{margin:0;color:var(--muted);font-size:14px}.end{padding:70px 0 90px;border:0}.end blockquote{margin:0;padding:0;max-width:820px;font-size:clamp(25px,4vw,42px);line-height:1.38;font-weight:750;letter-spacing:-.035em}.end p{color:var(--muted);font-size:13px;margin-top:22px}
+    .process-title{margin:0 0 22px;font-size:clamp(27px,3.5vw,39px);letter-spacing:-.035em}.process-intro{margin:-11px 0 27px;color:var(--muted);font-size:14px}.process-stack{display:grid;gap:28px}.process-row{position:relative;display:grid;grid-template-columns:190px 1fr;gap:28px;padding:25px 28px;background:#fff;border:1px solid #cedbd2;border-radius:16px}.process-row:not(:last-child):after{content:"↓";position:absolute;bottom:-28px;left:50%;transform:translateX(-50%);z-index:2;color:var(--green);font-size:25px;font-weight:800;line-height:28px}.process-stage{color:var(--green);font-size:12px;font-weight:800;letter-spacing:.08em}.process-stage strong{display:block;margin-top:5px;color:var(--ink);font-size:23px;letter-spacing:-.03em}.process-detail{display:grid;grid-template-columns:1fr 1fr;gap:24px}.process-detail b{display:block;margin-bottom:7px;color:var(--green);font-size:12px;letter-spacing:.06em}.process-detail span{color:var(--muted);font-size:14px;line-height:1.6}.process-row:last-child{background:var(--pale)}
+    .finding{display:grid;grid-template-columns:160px 1fr;gap:18px;padding:16px 0;border-top:1px solid var(--line)}.finding:first-child{border-top:0}.finding b{font-size:14px}.finding p{margin:0;color:var(--muted);font-size:14px}.names{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.name-card{padding:19px;background:#fff;border:1px solid var(--line);border-radius:13px}.name-card h3{margin:0 0 7px;font-size:18px}.name-card p{margin:0;color:var(--muted);font-size:13px}
+    .rename-map{display:grid;grid-template-columns:1fr 88px 2.3fr;gap:15px;align-items:center;margin-top:22px}.current-name{padding:22px;background:#f3f6f3;border:1px solid #d6e0da;border-radius:12px;text-align:center}.current-name small{display:block;margin-bottom:5px;color:var(--muted);font-size:11px}.current-name b{font-size:24px}.rename-arrow{text-align:center;color:var(--green);font-size:31px;font-weight:800}.candidate-names{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.candidate-names div{padding:20px 12px;background:#fff;border:1px solid var(--line);border-radius:12px;text-align:center;font-size:19px;font-weight:800}
+    .overview{padding:55px 0 62px;background:#eef3ef}.overview h2{font-size:27px;margin:0 0 8px}.overview-intro{margin:0 0 24px;color:var(--muted);font-size:14px}.logic{margin:0;padding:0;list-style:none;counter-reset:stage}.logic li{position:relative;display:grid;grid-template-columns:175px 1fr 1.15fr;gap:20px;align-items:center;margin:0 0 23px;padding:17px 20px;background:#fff;border:1px solid #cedbd2;border-radius:11px;box-shadow:0 2px 4px #20333208}.logic li:not(:last-child):after{content:"↓";position:absolute;left:calc(50% - 10px);bottom:-27px;color:var(--green);font-size:19px;line-height:24px;font-weight:800}.logic li:last-child{margin-bottom:0;border-color:#7ca999;background:#e2eee6}.logic-title{font-size:17px;font-weight:800}.logic-title:before{counter-increment:stage;content:"0" counter(stage) "  ";font-size:11px;color:var(--green);letter-spacing:.07em}.logic-touch{font-size:13px;color:var(--muted)}.logic-goal{font-size:13px;color:var(--ink);font-weight:650}.logic-key{display:block;color:var(--green);font-size:10px;font-weight:800;letter-spacing:.08em;margin-bottom:3px}.overview figcaption{margin-top:18px;color:var(--muted);font-size:12px}
+    @media(max-width:650px){.wrap{padding:0 20px}.top .wrap{display:block;padding-top:10px;padding-bottom:8px}.nav{gap:18px;margin-top:5px;padding-bottom:3px}.hero{padding:61px 0 51px}.hero p{font-size:16px}.section-head{display:block}.index{display:block;margin-bottom:14px}section{padding:55px 0}.flow,.branch,.two,.names{grid-template-columns:1fr}.flow-card{min-height:0}.flow-card:not(:last-child):after{content:"↓";top:auto;bottom:-18px;right:22px}.line,.finding{grid-template-columns:1fr;gap:3px;padding:14px 0}.direction{grid-template-columns:1fr;gap:7px}.panel{padding:21px}}
+    @media(max-width:650px){.process-row,.process-detail{grid-template-columns:1fr;gap:14px;padding:22px}.process-stage strong{font-size:20px}.process-detail{padding-top:14px;border-top:1px solid var(--line)}}
+    @media(max-width:650px){.rename-map{grid-template-columns:1fr;gap:10px}.rename-arrow{transform:rotate(90deg);line-height:30px}.candidate-names{grid-template-columns:1fr}.candidate-names div{padding:14px}}
+    @media(max-width:650px){.overview{padding:45px 0}.overview h2{font-size:24px}.logic li{grid-template-columns:1fr;gap:9px;padding:18px}.logic-title{font-size:16px}.logic-goal{padding-top:8px;border-top:1px solid var(--line)}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+    /* PPT 示意稿视觉方向：浅灰画布 + 深墨字 + 低饱和蓝绿/暖色阶段色 */
+    :root{--ink:#162534;--muted:#687684;--line:#dce3ea;--green:#2e6f73;--pale:#e7f1f1;--paper:#f5f7fa;--orange:#c47b4b}
+    body{background:var(--paper);color:var(--ink)}
+    .top{background:#f5f7fae8;border-bottom-color:#dce3ea}
+    .brand{color:#162534;letter-spacing:.01em}
+    .nav a:hover{color:#2e6f73}
+    .hero{padding-top:78px;border-bottom-color:#dce3ea}
+    .eyebrow{color:#2e6f73}
+    .hero h1{font-weight:780;letter-spacing:-.06em}
+    .hero p{color:#687684}
+    .chip{border-color:#d5e0e8;color:#416f78;background:#fff}
+    section{border-bottom-color:#dce3ea}
+    .section-head h2,.process-title{font-weight:760}
+    .panel,.flow-card,.process-row,.logic li,.name-card{border-color:#dce3ea;box-shadow:0 7px 18px rgba(35,54,73,.035)}
+    .panel{border-radius:14px}
+    .label{color:#b56f43}
+    .callout{background:#e7f1f1;border-left-color:#2e6f73}
+    .overview{background:#edf2f6}
+    .overview h2{font-weight:760}
+    .logic li{border-radius:14px;padding:20px 22px}
+    .logic li:nth-child(1){border-left:4px solid #5a88b4}
+    .logic li:nth-child(2){border-left:4px solid #4b9a95}
+    .logic li:nth-child(3){border-left:4px solid #d09258}
+    .logic li:nth-child(4){border-left:4px solid #c97868}
+    .logic li:nth-child(5){border-left:4px solid #2e6f73;background:#e5f0ef;border-color:#a9c8c9}
+    .logic-title:before,.logic-key,.index,.process-stage,.process-detail b,.direction b{color:#2e6f73}
+    .logic li:nth-child(1) .logic-title:before{color:#5a88b4}.logic li:nth-child(2) .logic-title:before{color:#4b9a95}.logic li:nth-child(3) .logic-title:before{color:#d09258}.logic li:nth-child(4) .logic-title:before{color:#c97868}
+    .process-row:last-child{background:#e5f0ef}
+    .rename-arrow{color:#2e6f73}
+    .candidate-names div:nth-child(1){border-top:3px solid #5a88b4}.candidate-names div:nth-child(2){border-top:3px solid #4b9a95}.candidate-names div:nth-child(3){border-top:3px solid #d09258}
+    .end blockquote{font-weight:760}
+    #context{display:none}
+    @media(max-width:650px){.hero{padding-top:58px}.logic li{padding:18px 19px}}
+    /* 版式系统：继承 PPT 的“提案页”结构，而非文章式长页面 */
+    .hero{max-width:1180px;padding:72px 42px 54px;display:grid;grid-template-columns:1.15fr .85fr;column-gap:70px;align-items:end}
+    .hero .eyebrow{grid-column:1/-1;margin-bottom:8px}
+    .hero h1{margin:8px 0 0;font-size:clamp(42px,5.2vw,68px)}
+    .hero p{align-self:end;margin:0 0 5px;font-size:16px;line-height:1.8}
+    .hero .meta{grid-column:1/-1;margin-top:30px}
+    section:not(.overview):not(.end){padding:58px 0 64px}
+    section:not(.overview):not(.end)>.wrap{max-width:1180px}
+    .section-head{grid-template-columns:230px 1fr;gap:42px;align-items:start;margin-bottom:26px;padding-bottom:22px;border-bottom:1px solid #dce3ea}
+    .index{font-size:13px;letter-spacing:.09em;padding-top:5px}
+    .section-head h2{font-size:32px;margin-bottom:7px}
+    .section-head p{font-size:15px;line-height:1.7}
+    .overview{padding:58px 0 70px}
+    .overview .wrap{max-width:1180px}
+    .overview h2{font-size:32px}
+    .logic{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;align-items:stretch}
+    .logic li{display:flex;flex-direction:column;gap:12px;margin:0!important;padding:18px 16px 17px;min-height:220px;border-left:0!important;border-top:4px solid #5a88b4}
+    .logic li:after{display:none!important}
+    .logic li:nth-child(2){border-top-color:#4b9a95}.logic li:nth-child(3){border-top-color:#d09258}.logic li:nth-child(4){border-top-color:#c97868}.logic li:nth-child(5){border-top-color:#2e6f73}
+    .logic-title{font-size:16px;line-height:1.45;min-height:45px}
+    .logic-touch,.logic-goal{font-size:12px;line-height:1.65}
+    .logic-goal{margin-top:auto;padding-top:12px;border-top:1px solid #e4e9ee}
+    .overview figcaption{margin-top:14px}
+    .process-title{font-size:32px;margin-bottom:8px}
+    .process-intro{font-size:15px;margin-bottom:24px}
+    .process-stack{gap:14px}
+    .process-row{grid-template-columns:220px 1fr;min-height:132px;border-radius:13px;padding:23px 25px;box-shadow:0 5px 14px rgba(35,54,73,.04)}
+    .process-row:not(:last-child):after{display:none}
+    .process-stage strong{font-size:24px}
+    .process-detail{gap:30px}
+    .branch{grid-template-columns:repeat(2,1fr);gap:14px}
+    .branch .panel{min-height:145px}
+    .panel{padding:24px 25px}
+    .lines{display:grid;grid-template-columns:repeat(2,1fr);column-gap:28px}
+    .line{grid-template-columns:1fr;gap:5px;padding:15px 0}
+    .line b{font-size:13px;color:#2e6f73}
+    .line span{font-size:13px;line-height:1.7}
+    .two{gap:14px}
+    .direction{grid-template-columns:180px 1fr;padding:20px 0}
+    .end{padding:64px 0 84px;background:#edf2f6}
+    .end .wrap{max-width:1180px}
+    .end blockquote{font-size:32px;max-width:760px}
+    @media(max-width:800px){.hero{display:block;padding:60px 24px 45px}.hero p{margin-top:22px}.hero .meta{margin-top:25px}.section-head{grid-template-columns:1fr;gap:10px}.logic{grid-template-columns:1fr 1fr}.logic li{min-height:0}.lines{grid-template-columns:1fr}}
+    @media(max-width:650px){section:not(.overview):not(.end){padding:48px 0 52px}.overview{padding:48px 0 55px}.logic{grid-template-columns:1fr}.logic li{min-height:0}.process-row{grid-template-columns:1fr}.direction{grid-template-columns:1fr;gap:7px}.end blockquote{font-size:27px}}
+    /* 标准 PPT 模板：白底、左上标题、左对齐、明确的配图区 */
+    body{background:#fff;color:#1c2b39}
+    .top{background:#ffffffee;border-bottom:1px solid #e6ebef}
+    .hero{max-width:1180px;padding:70px 42px 54px;display:block;text-align:left;border-bottom:1px solid #e6ebef}
+    .hero .eyebrow{display:block;margin-bottom:14px}
+    .hero h1{margin:0 0 22px;max-width:900px;font-size:clamp(44px,5.5vw,72px);line-height:1.12;text-align:left}
+    .hero p{max-width:760px;text-align:left;font-size:16px}
+    .hero .meta{margin-top:28px}
+    section:not(.overview):not(.end){background:#fff}
+    .section-head{grid-template-columns:230px 1fr;text-align:left;align-items:start}
+    .section-head h2,.section-head p{text-align:left}
+    .overview{background:#fff;border-bottom:1px solid #e6ebef}
+    .overview h2,.overview-intro{text-align:left}
+    .logic li{background:#fff;box-shadow:none;border-color:#dfe6eb}
+    .logic li:nth-child(5){background:#f7fbfb}
+    .placeholder{min-height:180px;background:#fafbfc;border:1px dashed #b8c5ce;border-radius:4px;color:#71808d}
+    .placeholder strong{color:#486b78}
+    .panel,.process-row,.flow-card,.name-card{box-shadow:none;border-radius:4px}
+    .panel{background:#fff}
+    .process-row{border-radius:4px}
+    .process-row:last-child{background:#f7fbfb}
+    .end{background:#fff;border-top:1px solid #e6ebef}
+    @media(max-width:800px){.hero{padding:56px 24px 42px}.section-head{grid-template-columns:1fr}}
+    /* 全案统一尺度：所有提案章节共用同一页宽、标题起点、边距与模块节奏 */
+    .wrap,.overview .wrap,.end .wrap,section:not(.overview):not(.end)>.wrap{max-width:1180px}
+    .wrap{padding-left:42px;padding-right:42px}
+    section:not(.overview):not(.end),.overview{padding-top:62px;padding-bottom:68px}
+    section:not(.overview):not(.end)>.wrap{width:100%}
+    .section-head{margin-left:0;margin-right:0}
+    #research{padding-top:34px!important;padding-bottom:34px!important;background:#fff}
+    #research .panel{max-width:100%;display:grid;grid-template-columns:230px 1fr;column-gap:38px;align-items:start;padding:25px 0;border:0;border-top:1px solid #e6ebef;border-bottom:1px solid #e6ebef;border-radius:0}
+    #research .label{grid-column:1;grid-row:1 / span 3;margin:4px 0 0}
+    #research h3,#research p{grid-column:2}
+    #research h3{margin:0 0 8px;font-size:21px}
+    #research p{font-size:14px;line-height:1.8}
+    #online .panel,#handoff .panel,#offline .panel{border-radius:4px}
+    #online .two,#offline .two{align-items:stretch}
+    #online .placeholder,#offline .placeholder,#handoff .placeholder{border-radius:4px;min-height:190px}
+    #handoff .journey{padding:18px 0;border-top:1px solid #e6ebef}
+    #handoff .journey:first-child{border-top:0;padding-top:0}
+    #handoff .journey+.journey{margin-top:0}
+    #future .direction{border-top:1px solid #e6ebef;padding:22px 0}
+    #future .direction:last-child{border-bottom:1px solid #e6ebef}
+    .end .wrap{padding-top:0}
+    @media(max-width:800px){.wrap{padding-left:24px;padding-right:24px}#research .panel{display:block;padding:22px 0}#research .label{margin-bottom:12px}.section-head{margin-bottom:24px}}
+    /* 参考 ai-designer-career-h5：整页 deck 化 */
+    :root{--ink:#162033;--muted:#627084;--line:#dbe3ee;--teal:#00a99d;--blue:#2563eb;--amber:#f3b21a;--coral:#f26a5b;--green:#2fb36d;--paper:#eef3f9;--shadow:0 24px 70px rgba(22,32,51,.13)}
+    html{background:#e9eef6}
+    body{background:linear-gradient(90deg,rgba(37,99,235,.08) 1px,transparent 1px),linear-gradient(rgba(22,32,51,.05) 1px,transparent 1px),#eef3f9;background-size:44px 44px;color:var(--ink)}
+    .top{background:rgba(255,255,255,.9);border-bottom:1px solid rgba(219,227,238,.9)}
+    main{padding:32px 24px 64px}
+    .hero,.overview,section:not(.overview):not(.end),.end{position:relative;width:min(1280px,calc(100vw - 48px));max-width:none;margin:0 auto 36px;padding:48px;border:1px solid rgba(219,227,238,.9);border-radius:8px;box-shadow:var(--shadow);overflow:hidden;background:linear-gradient(135deg,#fff 0%,#f8fbff 55%,#eef5ff 100%)}
+    .hero{min-height:510px;display:flex;flex-direction:column;justify-content:center}
+    .hero:after{content:"";position:absolute;width:360px;height:360px;right:-90px;top:-90px;border-radius:50%;background:rgba(0,169,157,.12);filter:blur(4px)}
+    .hero h1{position:relative;z-index:1;max-width:720px;color:var(--ink)}
+    .hero p,.hero .meta{position:relative;z-index:1}
+    .eyebrow,.label,.index{color:var(--teal)}
+    .overview{background:linear-gradient(135deg,#fff 0%,#f7fbfb 54%,#eef7f5 100%)}
+    .overview .logic{position:relative;z-index:1}
+    section:not(.overview):not(.end):nth-of-type(even){background:linear-gradient(135deg,#fff 0%,#f7fbfb 54%,#eef7f5 100%)}
+    .section-head{border-bottom:0;padding-bottom:0}
+    .section-head h2{font-size:clamp(30px,3.55vw,54px);line-height:1.04;letter-spacing:0}
+    .section-head p{font-size:18px;line-height:1.45;color:#38465a}
+    .panel,.process-row,.flow-card,.name-card,.logic li{background:rgba(255,255,255,.88);border:1px solid var(--line);border-radius:8px;box-shadow:0 12px 30px rgba(22,32,51,.06);backdrop-filter:blur(8px)}
+    .logic{gap:10px}
+    .logic li{border-top:4px solid var(--blue);border-left:1px solid var(--line)!important;min-height:230px}
+    .logic li:nth-child(2){border-top-color:var(--teal)}.logic li:nth-child(3){border-top-color:var(--amber)}.logic li:nth-child(4){border-top-color:var(--coral)}.logic li:nth-child(5){border-top-color:var(--green)}
+    .logic li:nth-child(5){background:rgba(255,255,255,.88)}
+    .placeholder{background:rgba(255,255,255,.72);border:1px dashed #b9c7d8;border-radius:8px}
+    .end{background:linear-gradient(135deg,#fff 0%,#f8fbff 55%,#eef5ff 100%)}
+    .end blockquote{font-size:clamp(30px,3.55vw,54px);line-height:1.04}
+    @media(max-width:800px){main{padding:20px 12px 40px}.hero,.overview,section:not(.overview):not(.end),.end{width:calc(100vw - 24px);padding:28px 22px;margin-bottom:20px;min-height:0}.hero{min-height:520px}.section-head h2{font-size:34px}.section-head p{font-size:16px}}
+    /* 标题定位规范：每页顶部、左对齐 */
+    .hero{justify-content:flex-start;align-items:flex-start;padding-top:48px}
+    .hero .eyebrow,.hero h1,.hero p,.hero .meta{align-self:flex-start;text-align:left}
+    .overview,.end,section:not(.overview):not(.end){display:block}
+    .overview h2,.overview-intro,.section-head,.process-title,.process-intro,.end blockquote,.end p{text-align:left}
+    .overview h2{margin-top:0}
+    .section-head{margin-top:0}
+    .process-title{margin-top:0}
+    @media(max-width:800px){.hero{padding-top:32px}}
+    /* 首页信息组：标题、副标题、胶囊统一左对齐 */
+    .hero{min-height:560px;padding:56px 58px 58px;justify-content:flex-start}
+    .hero .eyebrow{margin:0 0 22px;font-size:16px;letter-spacing:.08em}
+    .hero h1{margin:0 0 24px;max-width:780px;font-size:clamp(48px,6vw,76px);line-height:1.08;letter-spacing:-.035em}
+    .hero p{max-width:680px;margin:0;color:#38465a;font-size:20px;line-height:1.55;font-weight:600}
+    .hero .meta{display:flex;justify-content:flex-start;align-items:center;gap:10px;margin-top:30px;flex-wrap:wrap}
+    .hero .chip{padding:8px 15px;border-radius:999px;background:rgba(255,255,255,.82);font-size:13px;font-weight:700}
+    @media(max-width:800px){.hero{min-height:520px;padding:34px 28px 42px}.hero h1{font-size:44px}.hero p{font-size:17px}.hero .meta{margin-top:24px}}
+    /* 首页左对齐强制规则，覆盖前置 deck 样式 */
+    body main .hero{display:flex!important;flex-direction:column!important;align-items:flex-start!important;justify-content:flex-start!important;text-align:left!important;padding-left:58px!important;padding-right:58px!important}
+    body main .hero .eyebrow,body main .hero h1,body main .hero p,body main .hero .meta{width:auto!important;align-self:flex-start!important;margin-left:0!important;margin-right:0!important;text-align:left!important;transform:none!important}
+    body main .hero h1{max-width:780px!important}
+    body main .hero p{max-width:760px!important}
+    body main .hero .meta{justify-content:flex-start!important}
+    @media(max-width:800px){body main .hero{padding-left:28px!important;padding-right:28px!important}}
+    /* 章节 slide 化：左侧提案信息，右侧预留独立视觉区 */
+    #overview .wrap,#online .wrap,#handoff .wrap,#offline .wrap,#future .wrap{position:relative}
+    #online .section-head,#handoff .section-head,#offline .section-head,#future .section-head{width:62%;min-height:190px}
+    #online .section-head>div:last-child,#handoff .section-head>div:last-child,#offline .section-head>div:last-child,#future .section-head>div:last-child{max-width:700px}
+    #online .wrap:after,#handoff .wrap:after,#offline .wrap:after,#future .wrap:after{content:"配图区域\A 后续补充界面、流程或研究图示";white-space:pre;position:absolute;right:0;top:46px;width:30%;min-height:190px;display:grid;place-items:center;text-align:center;color:#7d8c9d;font-size:13px;line-height:1.7;background:rgba(255,255,255,.62);border:1px dashed #b9c7d8;border-radius:8px}
+    #online>.wrap> .panel,#online>.wrap> .branch,#online>.wrap> .two,#online>.wrap> .caption,#handoff>.wrap> .panel,#handoff>.wrap> .placeholder,#offline>.wrap> .two,#offline>.wrap> .placeholder,#offline>.wrap> .caption,#future>.wrap> .direction{position:relative;z-index:1}
+    #online>.wrap> .panel:first-of-type,#online>.wrap> .branch{margin-right:34%}
+    #handoff>.wrap> .panel{margin-right:34%}
+    #offline>.wrap> .two{margin-right:34%}
+    #future>.wrap> .direction{margin-right:34%}
+    @media(max-width:800px){#online .section-head,#handoff .section-head,#offline .section-head,#future .section-head{width:100%;min-height:0}#online .wrap:after,#handoff .wrap:after,#offline .wrap:after,#future .wrap:after{position:relative;right:auto;top:auto;width:100%;min-height:150px;margin:22px 0}#online>.wrap> .panel:first-of-type,#online>.wrap> .branch,#handoff>.wrap> .panel,#offline>.wrap> .two,#future>.wrap> .direction{margin-right:0}}
+    /* 章节标题统一左边基线：编号、标题、说明纵向排列 */
+    body main .section-head{display:block!important;grid-template-columns:none!important;width:62%!important;padding:0!important;margin:0 0 28px!important;text-align:left!important}
+    body main .section-head .index{display:block!important;margin:0 0 16px!important;padding:0!important;text-align:left!important}
+    body main .section-head>div:last-child{display:block!important;max-width:760px!important;text-align:left!important}
+    body main .section-head h2{margin:0 0 12px!important;text-align:left!important}
+    body main .section-head p{margin:0!important;text-align:left!important}
+    @media(max-width:800px){body main .section-head{width:100%!important}}
+    /* 最终 deck 版式：每个章节成为独立提案页 */
+    @media(min-width:801px){
+      main{padding:40px 24px 76px}
+      .hero,.overview,section:not(.overview):not(.end),.end{width:min(1280px,calc(100vw - 48px));height:clamp(520px,calc((100vw - 48px) * .5625),720px);min-height:0;max-height:720px;padding:56px 64px;margin-bottom:40px;aspect-ratio:auto;overflow:hidden}
+      .overview .wrap,section:not(.overview):not(.end)>.wrap,.end .wrap{height:100%;display:flex;flex-direction:column;justify-content:flex-start}
+      .overview .logic{margin-top:42px}
+      #online .section-head,#handoff .section-head,#offline .section-head,#future .section-head{margin-top:0!important}
+      #online>.wrap> .panel:first-of-type,#online>.wrap> .branch,#handoff>.wrap> .panel,#offline>.wrap> .two,#future>.wrap> .direction{margin-right:34%}
+    }
+    @media(max-width:800px){main{padding:20px 12px 42px}.hero,.overview,section:not(.overview):not(.end),.end{min-height:0;aspect-ratio:auto}}
+    /* 新提案目录版：隐藏旧内容，使用重组后的 slide 结构 */
+    body>main:not(.new-deck){display:none!important}
+    body>header.top + main.new-deck + header.top{display:none!important}
+    .new-deck{display:block!important;padding:40px 24px 76px!important}
+    .deck-slide{position:relative;width:min(1280px,calc(100vw - 48px));height:clamp(520px,calc((100vw - 48px)*.5625),720px);margin:0 auto 40px;padding:56px 64px;overflow:hidden;background:linear-gradient(135deg,#fff 0%,#f8fbff 55%,#eef5ff 100%);border:1px solid rgba(219,227,238,.9);border-radius:8px;box-shadow:0 24px 70px rgba(22,32,51,.13)}
+    .slide-copy,.slide-head{position:relative;z-index:2;max-width:760px}.slide-head .slide-no{display:block;margin-bottom:18px;color:#00a99d;font-size:17px;font-weight:800;letter-spacing:.08em}.slide-head h2{margin:0 0 16px;font-size:clamp(34px,3.55vw,54px);line-height:1.06;color:#162033}.slide-head p,.lead{margin:0;color:#38465a;font-size:19px;line-height:1.5;font-weight:600}.cover-slide{display:grid;grid-template-columns:1.15fr .85fr;gap:36px;align-items:center}.cover-slide h1{margin:0 0 22px;font-size:clamp(48px,5.5vw,76px);line-height:1.06;color:#162033}.cover-slide .eyebrow{display:block;margin-bottom:18px}.cover-slide .meta{display:flex;gap:10px;margin-top:28px;flex-wrap:wrap}.cover-art{position:relative;height:390px}.art-card{position:absolute;right:0;top:45px;width:290px;padding:24px;background:rgba(255,255,255,.86);border:1px solid #dbe3ee;border-radius:8px;box-shadow:0 18px 38px rgba(22,32,51,.11)}.art-card b{display:block;color:#2563eb;font-size:24px}.art-card span{display:block;margin-top:10px;color:#627084;line-height:1.6}.art-node{position:absolute;padding:14px 20px;color:#fff;text-align:center;font-weight:800;border-radius:8px;box-shadow:0 16px 32px rgba(22,32,51,.16)}.art-node.teal{right:210px;top:210px;background:#00a99d}.art-node.blue{right:10px;top:285px;background:#2563eb}.art-node.amber{right:170px;bottom:10px;background:#f3b21a;color:#182133}.overview-track{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:52px}.overview-card{min-height:188px;padding:20px 16px;background:rgba(255,255,255,.88);border:1px solid #dbe3ee;border-top:5px solid #2563eb;border-radius:8px;box-shadow:0 12px 30px rgba(22,32,51,.06)}.overview-card b,.overview-card span,.overview-card small{display:block}.overview-card b{font-size:18px}.overview-card span{margin-top:15px;color:#627084;font-size:13px}.overview-card small{margin-top:22px;padding-top:13px;border-top:1px solid #e5ebf2;color:#38465a;line-height:1.5}.teal-card{border-top-color:#00a99d}.amber-card{border-top-color:#f3b21a}.coral-card{border-top-color:#f26a5b}.green-card{border-top-color:#2fb36d}.slide-bottom{position:absolute;left:64px;right:64px;bottom:42px;padding-left:14px;border-left:4px solid #00a99d;color:#263348;font-size:17px;font-weight:700;line-height:1.45}.four-pillars,.entry-grid,.offline-grid,.media-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:42px}.four-pillars>div,.entry-card,.offline-card,.media-card,.content-card{padding:22px;background:rgba(255,255,255,.86);border:1px solid #dbe3ee;border-radius:8px;box-shadow:0 12px 30px rgba(22,32,51,.06)}.four-pillars strong{display:block;color:#2563eb;font-size:14px}.four-pillars b,.four-pillars span{display:block}.four-pillars b{margin-top:22px;font-size:20px}.four-pillars span{margin-top:9px;color:#627084;font-size:13px;line-height:1.5}.evidence-strip{position:absolute;left:64px;right:64px;bottom:45px;padding:16px 18px;background:#e7f1f1;border-left:4px solid #00a99d;color:#263348;font-weight:700}.two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:42px}.content-card label,.media-card label{color:#00a99d;font-size:12px;font-weight:800}.content-card h3{margin:14px 0 10px;font-size:21px}.content-card p,.media-card span,.entry-card span,.offline-card span{color:#627084;font-size:14px;line-height:1.65}.mini-tags{display:flex;gap:8px;margin-top:20px;flex-wrap:wrap}.mini-tags span{padding:6px 10px;color:#2f6870;background:#e7f1f1;border-radius:999px;font-size:12px}.rename-line{display:flex;align-items:center;gap:16px;margin:26px 0 16px;font-size:20px}.rename-line i{color:#00a99d;font-style:normal;font-size:28px}.rename-line strong{color:#2563eb}.entry-grid{grid-template-columns:repeat(3,1fr)}.entry-card{border-top:5px solid #2563eb}.entry-card small,.entry-card b,.entry-card span{display:block}.entry-card b{margin:16px 0 9px;font-size:20px}.entry-card small{color:#00a99d;font-weight:800}.image-slot{position:absolute;right:64px;top:220px;width:30%;min-height:170px;display:grid;place-items:center;text-align:center;color:#7d8c9d;font-size:13px;line-height:1.7;border:1px dashed #b9c7d8;border-radius:8px;background:rgba(255,255,255,.62)}.flow-list{display:grid;grid-template-columns:1fr 1fr;gap:0 28px;width:62%;margin-top:34px}.flow-list>div{padding:16px 0;border-top:1px solid #dbe3ee}.flow-list strong,.flow-list span{display:block}.flow-list strong{color:#00a99d;font-size:15px}.flow-list span{margin-top:6px;color:#627084;font-size:13px;line-height:1.6}.media-grid{grid-template-columns:1fr 1fr 1.2fr}.media-card b,.media-card span{display:block}.media-card b{margin:12px 0 8px;font-size:18px}.video-demo{display:grid;place-items:center;align-content:center;min-height:180px;border:1px dashed #b9c7d8;border-radius:8px;background:rgba(255,255,255,.62);text-align:center}.video-demo .play{display:grid;place-items:center;width:46px;height:46px;margin-bottom:10px;border-radius:50%;background:#f26a5b;color:#fff}.video-demo span{margin-top:8px;padding:0 20px;color:#627084;font-size:12px;line-height:1.5}.offline-grid{grid-template-columns:repeat(3,1fr);width:64%;margin-top:45px}.offline-card strong,.offline-card span{display:block}.offline-card strong{font-size:18px}.offline-card span{margin-top:12px}
+    @media(max-width:800px){.new-deck{padding:20px 12px 42px!important}.deck-slide{width:calc(100vw - 24px);height:auto;min-height:620px;padding:30px 24px;margin-bottom:22px}.cover-slide{display:block}.cover-art{height:220px;margin-top:25px}.overview-track,.four-pillars,.entry-grid,.two-col,.media-grid,.offline-grid,.flow-list{grid-template-columns:1fr;width:100%}.image-slot{position:relative;right:auto;top:auto;width:100%;min-height:140px;margin-top:22px}.slide-bottom,.evidence-strip{position:relative;left:auto;right:auto;bottom:auto;margin-top:28px}.cover-slide h1{font-size:44px}.slide-head h2{font-size:36px}}
+    /* 02 线上认知方案：合并为一张连续长页面，以分割线区分四个部分 */
+    .online-part,.new-deck>section:nth-of-type(4),.new-deck>section:nth-of-type(5),.new-deck>section:nth-of-type(6),.new-deck>section:nth-of-type(7){height:auto!important;min-height:0!important;aspect-ratio:auto!important;max-height:none!important;margin:0 auto!important;border-top:1px solid #dbe3ee!important;border-radius:0!important;box-shadow:none!important;padding-top:48px!important;padding-bottom:52px!important;background:rgba(255,255,255,.96)!important}
+    .online-part .slide-head,.new-deck>section:nth-of-type(4) .slide-head,.new-deck>section:nth-of-type(5) .slide-head,.new-deck>section:nth-of-type(6) .slide-head,.new-deck>section:nth-of-type(7) .slide-head{max-width:760px}
+    .online-part .slide-head .slide-no,.new-deck>section:nth-of-type(4) .slide-no,.new-deck>section:nth-of-type(5) .slide-no,.new-deck>section:nth-of-type(6) .slide-no,.new-deck>section:nth-of-type(7) .slide-no{font-size:14px;margin-bottom:12px}
+    .online-part .slide-head h2,.new-deck>section:nth-of-type(4) .slide-head h2,.new-deck>section:nth-of-type(5) .slide-head h2,.new-deck>section:nth-of-type(6) .slide-head h2,.new-deck>section:nth-of-type(7) .slide-head h2{font-size:32px}
+    @media(max-width:800px){.online-part,.new-deck>section:nth-of-type(4),.new-deck>section:nth-of-type(5),.new-deck>section:nth-of-type(6),.new-deck>section:nth-of-type(7){width:calc(100vw - 24px)!important;padding:32px 24px 42px!important}.online-part .slide-head h2,.new-deck>section:nth-of-type(4) .slide-head h2,.new-deck>section:nth-of-type(5) .slide-head h2,.new-deck>section:nth-of-type(6) .slide-head h2,.new-deck>section:nth-of-type(7) .slide-head h2{font-size:30px}}
+    /* 封面清理与 03 独立成页 */
+    .cover-slide .meta{display:none!important}
+    #offline-new{margin-top:40px!important;border-radius:8px!important;border-top:1px solid rgba(219,227,238,.9)!important;box-shadow:0 24px 70px rgba(22,32,51,.13)!important;background:linear-gradient(135deg,#fff 0%,#f8fbff 55%,#eef5ff 100%)!important}
+    @media(max-width:800px){#offline-new{margin-top:22px!important;border-radius:8px!important}}
+    /* 新版 deck 的明确容器规则，避免旧 section 样式覆盖封面布局 */
+    .new-deck>section.deck-slide{position:relative;display:block;width:min(1280px,calc(100vw - 48px));height:min(720px,calc((100vw - 48px)*.5625));min-height:0;max-height:none;margin:0 auto 40px;padding:56px 64px;overflow:hidden;box-sizing:border-box}
+    .new-deck{--bookend-background:linear-gradient(135deg,#fff 0%,#f7fbfb 54%,#eef7f5 100%)}
+    .new-deck>section.cover-slide{display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;gap:0;background:var(--bookend-background)!important}
+    .new-deck>section.cover-slide{position:relative;overflow:hidden;isolation:isolate}
+    .new-deck>section.cover-slide .cover-credit{z-index:2}
+    .cover-slide .slide-copy{width:min(760px,100%);max-width:760px;flex:none;align-self:flex-start;margin:0;text-align:left}
+    .cover-slide .eyebrow{display:block;margin:0 0 25px;color:#00a99d;font-size:17px;font-weight:800;letter-spacing:.08em;text-align:left}
+    .cover-slide h1{display:block;margin:0 0 25px;max-width:760px;color:#162033;font-size:clamp(46px,5vw,68px);font-weight:800;line-height:1.12;letter-spacing:-.025em;text-align:left}
+    .cover-slide .lead{max-width:700px;margin:0;color:#526176;font-size:20px;font-weight:500;line-height:1.6;text-align:left}
+    .new-deck>section.cover-slide .lead{max-width:none;width:100%;font-size:17px;font-weight:400;line-height:1.5;white-space:nowrap}
+    .cover-path{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:auto;padding:0 0 18px;border-bottom:1px solid #dbe3ee;width:100%;color:#35455a;font-size:14px;font-weight:700}
+    .cover-path span{display:inline-block;padding:8px 0}.cover-path i{color:#00a99d;font-size:18px;font-style:normal;font-weight:800}
+    .cover-credit{position:absolute;left:64px;bottom:18px;color:#8a97a8;font-size:12px;font-weight:600;letter-spacing:.02em}
+    .new-deck>section:nth-of-type(4),.new-deck>section:nth-of-type(5),.new-deck>section:nth-of-type(6),.new-deck>section:nth-of-type(7){height:auto;min-height:0;max-height:none;margin-bottom:0;overflow:visible}
+    .new-deck>section#offline-new{margin-top:40px;margin-bottom:40px}
+    @media(max-width:800px){.new-deck>section.deck-slide{width:calc(100vw - 24px);height:auto;min-height:0;padding:32px 24px;margin-bottom:22px;overflow:visible}.new-deck>section.cover-slide{min-height:580px}.new-deck>section.cover-slide .cover-interface{right:2%;bottom:12%;width:72%;opacity:.1}.cover-slide h1{font-size:clamp(38px,10vw,48px)}.new-deck>section.cover-slide .lead{font-size:15px;white-space:normal}.cover-path{gap:7px;font-size:12px}.new-deck>section:nth-of-type(4),.new-deck>section:nth-of-type(5),.new-deck>section:nth-of-type(6),.new-deck>section:nth-of-type(7){margin-bottom:0}}
+    /* 02 连续页校正：移除单页 PPT 的绝对定位，所有内容依文档流排列 */
+    .new-deck>section:nth-of-type(4),.new-deck>section:nth-of-type(5),.new-deck>section:nth-of-type(6),.new-deck>section:nth-of-type(7){height:auto!important;min-height:0!important;max-height:none!important;overflow:visible!important;box-shadow:none!important;background:#fff!important;margin:0 auto!important;border-radius:0!important}
+    .new-deck>section:nth-of-type(7){border-radius:0 0 8px 8px!important}
+    .new-deck>section:nth-of-type(4) .slide-bottom,.new-deck>section:nth-of-type(5) .slide-bottom,.new-deck>section:nth-of-type(6) .slide-bottom,.new-deck>section:nth-of-type(7) .slide-bottom{position:static!important;left:auto!important;right:auto!important;bottom:auto!important;display:block;width:100%;margin:32px 0 0;padding:16px 18px;box-sizing:border-box}
+    .new-deck>section:nth-of-type(5) .image-slot,.new-deck>section:nth-of-type(6) .image-slot{position:static!important;right:auto!important;top:auto!important;width:100%;min-height:150px;margin:28px 0 0;box-sizing:border-box}
+    .new-deck>section:nth-of-type(6) .flow-list{width:100%}
+    .new-deck>section:nth-of-type(4) .two-col,.new-deck>section:nth-of-type(5) .entry-grid,.new-deck>section:nth-of-type(6) .flow-list,.new-deck>section:nth-of-type(7) .media-grid{margin-top:32px}
+    .new-deck>section:nth-of-type(4) .content-card,.new-deck>section:nth-of-type(5) .entry-card,.new-deck>section:nth-of-type(7) .media-card{min-width:0}
+    .new-deck>section:nth-of-type(4) .rename-line{flex-wrap:wrap}
+    @media(max-width:800px){.new-deck>section:nth-of-type(4),.new-deck>section:nth-of-type(5),.new-deck>section:nth-of-type(6),.new-deck>section:nth-of-type(7){width:calc(100vw - 24px)!important}.new-deck>section:nth-of-type(4) .two-col,.new-deck>section:nth-of-type(5) .entry-grid,.new-deck>section:nth-of-type(6) .flow-list,.new-deck>section:nth-of-type(7) .media-grid{grid-template-columns:1fr}}
+    .promo-solution{margin-top:34px}.promo-heading{display:flex;align-items:baseline;justify-content:space-between;gap:20px;margin-bottom:16px}.promo-heading b{font-size:21px}.promo-heading span{color:#627084;font-size:13px}.promo-figure{margin:0}.promo-figure a{display:block;overflow:hidden;border:1px solid #dbe3ee;border-radius:8px;background:#192f3c}.promo-figure img{display:block;width:100%;height:auto}.promo-figure figcaption{margin-top:10px;color:#627084;font-size:12px}.promo-notes{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:26px;align-items:start;margin-top:34px;padding:26px 0;border-top:1px solid #dbe3ee}.promo-notes h3{margin:7px 0 8px;font-size:19px}.promo-notes p,.promo-naming p{max-width:510px;margin:0;color:#627084;font-size:14px;line-height:1.7}.promo-note-label{color:#00a99d;font-size:12px;font-weight:800;letter-spacing:.04em}.promo-naming{padding:27px 0 10px;border-top:1px solid #dbe3ee}.promo-naming .rename-line{margin:12px 0 10px}.promo-naming .rename-line strong{font-size:19px}.promo-section .slide-head{max-width:860px}
+    @media(max-width:800px){.promo-heading{display:block}.promo-heading span{display:block;margin-top:4px}.promo-notes{grid-template-columns:1fr;gap:20px}.promo-naming .rename-line{gap:10px;font-size:17px}.promo-naming .rename-line strong{font-size:17px}}
+    .promo-figure{width:min(960px,100%);max-width:960px;margin:0;text-align:left}.promo-figure img{width:100%;height:auto;object-fit:contain;image-rendering:auto}
+    .promo-section .promo-naming{margin-top:32px;padding:24px 0 26px;border-top:1px solid #dbe3ee;border-bottom:1px solid #dbe3ee}
+    .promo-section .promo-solution{margin-top:32px}
+    .promo-visual-caption{margin-top:18px;padding:18px 20px;background:#f8fafc;border:1px solid #dbe3ee;border-radius:8px;color:#263348;font-size:22px;font-weight:800;line-height:1.35}
+    .naming-segment{width:min(1280px,calc(100vw - 48px));margin:0 auto;padding:44px 64px 50px;background:#fff;border:1px solid #dbe3ee;border-top:0;border-bottom:0;box-sizing:border-box}
+    .naming-title{margin:0 0 28px;color:#162033;font-size:34px;line-height:1.2;letter-spacing:-.03em}
+    .naming-segment .promo-naming{margin:0;padding:0;border:0}
+    .naming-segment .promo-note-label{display:block;margin-bottom:18px;font-size:15px}
+    .naming-segment .rename-line{margin:0 0 22px;font-size:34px;font-weight:800}
+    .naming-segment .rename-line strong{font-size:34px}
+    .naming-segment .promo-naming p{max-width:950px;font-size:15px}
+    @media(max-width:800px){.naming-segment{width:calc(100vw - 24px);padding:32px 24px 38px}.naming-segment .rename-line,.naming-segment .rename-line strong{font-size:20px}}
+    .name-evidence{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin:30px 0 22px;padding:24px 0;border-top:1px solid #dbe3ee;border-bottom:1px solid #dbe3ee}.name-evidence article{min-width:0}.name-evidence b{display:block;margin-bottom:7px;color:#162033;font-size:15px}.name-evidence p{max-width:none!important;color:#627084;font-size:12px!important;line-height:1.55}.name-inference{display:flex;gap:14px;align-items:flex-start;padding:16px 18px;background:#f1f7f7;border-left:4px solid #00a99d}.name-inference strong{flex:none;color:#007f79;font-size:13px}.name-inference span{color:#35455a;font-size:14px;line-height:1.65}.name-validation{margin-top:16px!important;color:#627084;font-size:13px!important}.naming-segment .promo-naming p.name-validation{max-width:none}
+    @media(max-width:800px){.name-evidence{grid-template-columns:1fr;gap:18px}.name-inference{display:block}.name-inference strong{display:block;margin-bottom:6px}}
+    .naming-evidence-panel{display:grid;grid-template-columns:minmax(0,1.05fr) 1px minmax(0,.95fr);gap:24px;align-items:stretch;padding:20px 24px;background:#f1f3f6;border:1px solid #d9dee6;border-radius:8px}.naming-panel-divider{display:block;width:1px;background:#d5dce6}.research-view{margin:0;padding:0;background:transparent;border:0;border-radius:0}.research-view-label,.competitor-naming h3{display:block;margin:0 0 13px;color:#5d6878;font-size:13px;font-weight:800;line-height:1.35;letter-spacing:.04em}.research-view .name-evidence{grid-template-columns:1fr;gap:11px;margin:0;padding:0;border:0}.competitor-naming{padding:0;border:0}.competitor-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}.competitor-type{min-height:42px;padding:7px 11px;background:#fff;border:1px solid #dbe3ee;border-radius:7px}.competitor-type span,.competitor-type b{display:block}.competitor-type span{color:#7b8797;font-size:8.5px;line-height:1.25}.competitor-type b{margin-top:2px;font-size:13px;line-height:1.16}.competitor-type a{color:#17243a;text-decoration:none}.competitor-type a:hover{color:#2563eb}.naming-recommendation{padding-top:44px}.naming-recommendation .promo-note-label{margin-bottom:18px}.naming-recommendation .rename-line{margin:0 0 24px}.naming-recommendation .name-inference{margin-top:22px}.naming-recommendation .name-validation{margin-bottom:0}
+    @media(max-width:1000px){.naming-evidence-panel{grid-template-columns:1fr;gap:22px}.naming-panel-divider{width:100%;height:1px}}@media(max-width:800px){.naming-title{font-size:28px}.naming-evidence-panel{padding:20px}.competitor-grid{grid-template-columns:1fr 1fr}}@media(max-width:520px){.competitor-grid{grid-template-columns:1fr}}
+    .persona-card{padding:20px;background:#f8fafc;border:1px solid #dbe3ee;border-radius:8px}.persona-card .persona-title{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:16px}.persona-card .persona-title h3{margin:0;font-size:19px}.persona-card .persona-title span{color:#627084;font-size:11px}.persona-viz{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.persona-metric{min-width:0;padding:13px;background:#fff;border:1px solid #e1e7ef;border-radius:7px}.persona-metric small{display:block;margin-bottom:8px;color:#627084;font-size:11px}.persona-metric strong{display:block;color:#162033;font-size:15px;line-height:1.3}.persona-bar{height:6px;margin-top:12px;overflow:hidden;background:#e8edf4;border-radius:999px}.persona-bar i{display:block;height:100%;border-radius:999px;background:#2563eb}.persona-bar.gender i{width:88%;background:#00a99d}.persona-range{position:relative;height:7px;margin-top:13px;background:#e8edf4;border-radius:999px}.persona-range i{position:absolute;top:0;height:100%;border-radius:999px;background:#2563eb}.persona-range.age i{left:17%;width:53%}.persona-range.income i{left:24%;width:42%;background:#f3b21a}.persona-scale{display:flex;justify-content:space-between;margin-top:5px;color:#8a97a8;font-size:9px}.persona-jobs{display:flex;gap:5px;flex-wrap:wrap;margin-top:10px}.persona-jobs span{padding:5px 7px;color:#285c65;background:#e9f4f3;border-radius:999px;font-size:10px;font-weight:700}.persona-note{margin-top:13px!important;max-width:none!important;color:#627084!important;font-size:11px!important;line-height:1.55!important}.test-card{min-width:0;padding:20px;background:#f8fafc;border:1px solid #dbe3ee;border-radius:8px}.test-card-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:16px}.test-card-head h3{margin:0;font-size:19px}.test-card-head span{color:#627084;font-size:11px}.test-figure{margin:0}.test-figure a{display:block;overflow:hidden;background:#18313f;border:1px solid #dbe3ee;border-radius:7px}.test-figure img{display:block;width:100%;height:auto}.test-figure figcaption{margin-top:9px;color:#627084;font-size:11px;line-height:1.5}.promo-notes .visual-direction{grid-column:1/-1;padding-top:4px}
+    @media(max-width:900px){.promo-notes{grid-template-columns:1fr}.persona-viz{grid-template-columns:1fr 1fr}.promo-notes .visual-direction{grid-column:auto}}@media(max-width:600px){.persona-viz{grid-template-columns:1fr}.persona-card .persona-title,.test-card-head{display:block}.persona-card .persona-title span,.test-card-head span{display:block;margin-top:5px}}
+    /* 模块分割修正：取消旧连续页视觉，恢复每个模块独立成页 */
+    .new-deck>.naming-segment,
+    .new-deck>section.deck-slide:not(.cover-slide){
+      margin:0 auto 44px!important;
+      border:1px solid rgba(219,227,238,.9)!important;
+      border-radius:8px!important;
+      box-shadow:0 24px 70px rgba(22,32,51,.13)!important;
+      background:linear-gradient(135deg,#fff 0%,#f8fbff 58%,#f2f7ff 100%)!important;
+    }
+    .new-deck>.naming-segment{overflow:hidden!important}
+    .new-deck>section.deck-slide:not(.cover-slide){overflow:visible!important}
+    .new-deck>section.deck-slide:not(.cover-slide)::after,
+    .new-deck>.naming-segment::after{
+      content:"";
+      display:block;
+      clear:both;
+    }
+    @media(max-width:800px){
+      .new-deck>.naming-segment,
+      .new-deck>section.deck-slide:not(.cover-slide){margin-bottom:26px!important}
+    }
+    /* 汇报只用标题区分板块，隐藏章节数字与卡片序号 */
+    .new-deck .slide-head .slide-no,.new-deck .four-pillars strong{display:none!important}
+    .new-deck .four-pillars b{margin-top:0}
+    /* 封面标题组垂直居中，页脚流程固定在底部 */
+    .new-deck>section.cover-slide{justify-content:center!important}
+    .new-deck>section.cover-slide .slide-copy{margin:0 0 34px!important}
+    .new-deck>section.cover-slide .cover-path{position:absolute;left:64px;right:64px;bottom:48px;width:auto;margin:0}
+    @media(max-width:800px){.new-deck>section.cover-slide .cover-path{left:24px;right:24px;bottom:54px}.new-deck>section.cover-slide .slide-copy{margin:0 0 45px!important}.cover-credit{left:24px;bottom:20px}}
+    /* 封面主副标题模块左对齐、上下居中 */
+    .new-deck>section.cover-slide{align-items:flex-start!important;justify-content:center!important}
+    .new-deck>section.cover-slide .slide-copy{align-self:flex-start!important;width:min(900px,100%);max-width:900px;text-align:left!important}
+    .new-deck>section.cover-slide .eyebrow,.new-deck>section.cover-slide h1,.new-deck>section.cover-slide .lead{margin-left:0;margin-right:0;text-align:left!important}
+    /* 最终版式收口：统一 PPT 页面节奏，避免旧连续页与单页规则互相打架 */
+    .new-deck{background:#eef3f8!important;padding:40px 24px 86px!important}
+    .new-deck>section.deck-slide:not(.cover-slide),
+    .new-deck>.naming-segment{
+      width:min(1280px,calc(100vw - 48px))!important;
+      height:auto!important;
+      min-height:0!important;
+      max-height:none!important;
+      margin:0 auto 48px!important;
+      padding:52px 64px 56px!important;
+      overflow:visible!important;
+      box-sizing:border-box!important;
+      background:#fff!important;
+      border:1px solid #dbe3ee!important;
+      border-radius:10px!important;
+      box-shadow:0 18px 48px rgba(22,32,51,.08)!important;
+    }
+    .new-deck .slide-head{max-width:900px!important;margin:0 0 30px!important}
+    .new-deck .slide-head h2,
+    .new-deck .naming-title{
+      margin:0 0 14px!important;
+      color:#162033!important;
+      font-size:38px!important;
+      line-height:1.18!important;
+      letter-spacing:0!important;
+      font-weight:800!important;
+    }
+    .new-deck .slide-head p{max-width:940px!important;color:#526176!important;font-size:17px!important;line-height:1.55!important;font-weight:500!important}
+    .new-deck .overview-track{grid-template-columns:repeat(4,minmax(0,1fr));margin-top:36px!important;gap:14px!important}
+    .new-deck #overview .overview-card{display:flex;flex-direction:column;min-height:310px;padding:18px 17px 19px!important}
+    .new-deck #overview .overview-audience{display:inline-flex;align-self:flex-start;align-items:center;margin:0 0 15px!important;padding:5px 10px;border-radius:999px;background:#e7f1f1;color:#008e82;font-size:12px;line-height:1.3;font-weight:700}
+    .new-deck #overview .overview-card b{margin:0 0 18px;color:#162033;font-size:18px;line-height:1.35}
+    .new-deck #overview .overview-detail{margin:0 0 12px}
+    .new-deck #overview .overview-detail:last-child{margin-top:auto;margin-bottom:0;padding-top:12px;border-top:1px solid #e5ebf2}
+    .new-deck #overview .overview-field{display:block;margin:0 0 5px!important;color:#009e92;font-size:11px;line-height:1.3;font-weight:700;letter-spacing:.05em}
+    .new-deck #overview .overview-detail p{margin:0;color:#526176;font-size:13px;line-height:1.55;font-weight:400}
+    .new-deck .overview-card,
+    .new-deck .entry-card,
+    .new-deck .offline-card,
+    .new-deck .media-card,
+    .new-deck .content-card,
+    .new-deck .persona-card,
+    .new-deck .test-card{
+      background:#fff!important;
+      border:1px solid #dbe3ee!important;
+      border-radius:8px!important;
+      box-shadow:0 10px 26px rgba(22,32,51,.06)!important;
+    }
+    .new-deck .slide-bottom,
+    .new-deck .evidence-strip{
+      position:static!important;
+      width:100%!important;
+      margin:30px 0 0!important;
+      box-sizing:border-box!important;
+    }
+    .new-deck .image-slot{
+      position:static!important;
+      width:100%!important;
+      min-height:150px!important;
+      margin:28px 0 0!important;
+      box-sizing:border-box!important;
+    }
+    .new-deck .entry-grid,
+    .new-deck .media-grid,
+    .new-deck .offline-grid,
+    .new-deck .flow-list,
+    .new-deck .promo-notes{
+      width:100%!important;
+      margin-top:28px!important;
+    }
+    .new-deck .entry-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:16px!important}
+    .new-deck .flow-list{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:16px 26px!important}
+    .new-deck .media-grid{grid-template-columns:1fr 1fr 1.1fr!important;gap:16px!important}
+    .new-deck .offline-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:16px!important}
+    .new-deck .promo-notes{grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;gap:24px!important;padding:0!important;border-top:0!important}
+    .new-deck .promo-solution{margin-top:34px!important;padding-top:28px!important;border-top:1px solid #dbe3ee!important}
+    .new-deck .promo-heading{align-items:flex-start!important;margin-bottom:18px!important}
+    .new-deck .promo-heading b{font-size:22px!important;line-height:1.35!important;color:#162033!important}
+    .new-deck .promo-heading span{max-width:680px!important;color:#526176!important;font-size:14px!important;line-height:1.6!important}
+    .new-deck .promo-figure{width:100%!important;max-width:1040px!important}
+    .new-deck .promo-visual-caption{max-width:1040px!important;font-size:18px!important}
+    .new-deck .naming-evidence-panel{margin-top:6px!important}
+    .new-deck .naming-recommendation{padding-top:32px!important}
+    .new-deck #offline-new{background:#fff!important;border-radius:10px!important}
+    .new-deck .promo-section .promo-notes{grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr)!important}
+    .new-deck .promo-section .promo-notes{
+      grid-template-columns:minmax(0,1.45fr) minmax(0,1fr)!important;
+      align-items:stretch!important;
+      gap:18px!important;
+    }
+    .new-deck .promo-section .persona-card,
+    .new-deck .promo-section .test-card{
+      height:100%!important;
+      box-sizing:border-box!important;
+    }
+    .new-deck .promo-section .persona-card{
+      padding:16px!important;
+    }
+    .new-deck .promo-section .test-card{
+      padding:16px!important;
+    }
+    .new-deck .promo-section .persona-card .persona-title,
+    .new-deck .promo-section .test-card-head{
+      margin-bottom:10px!important;
+    }
+    .new-deck .promo-section .persona-viz{
+      grid-template-columns:repeat(4,minmax(0,1fr))!important;
+      gap:8px!important;
+    }
+    .new-deck .promo-section .persona-metric{
+      padding:10px!important;
+    }
+    .new-deck .promo-section .persona-metric small{
+      margin-bottom:6px!important;
+      font-size:10px!important;
+    }
+    .new-deck .promo-section .persona-metric strong{
+      font-size:13px!important;
+      line-height:1.25!important;
+    }
+    .new-deck .promo-section .persona-bar,
+    .new-deck .promo-section .persona-range{
+      margin-top:9px!important;
+    }
+    .new-deck .promo-section .persona-note{
+      margin-top:10px!important;
+      line-height:1.45!important;
+    }
+    .new-deck .promo-section .persona-jobs{
+      gap:4px!important;
+      margin-top:8px!important;
+    }
+    .new-deck .promo-section .persona-jobs span{
+      padding:4px 6px!important;
+      font-size:9px!important;
+    }
+    .new-deck .promo-section .gender-signal{
+      display:flex!important;
+      align-items:center!important;
+      gap:6px!important;
+      margin-top:9px!important;
+    }
+    .new-deck .promo-section .gender-signal span{
+      display:grid!important;
+      place-items:center!important;
+      width:24px!important;
+      height:24px!important;
+      border-radius:50%!important;
+      background:#eef3f8!important;
+      color:#8a97a8!important;
+      font-size:11px!important;
+      font-weight:700!important;
+    }
+    .new-deck .promo-section .gender-signal span.active{
+      background:#00a99d!important;
+      color:#fff!important;
+    }
+    .new-deck .promo-section .gender-signal em{
+      margin-left:auto!important;
+      color:#00857c!important;
+      font-size:10px!important;
+      font-style:normal!important;
+      font-weight:800!important;
+      white-space:nowrap!important;
+    }
+    .new-deck .promo-section .age-bands{
+      display:grid!important;
+      grid-template-columns:repeat(4,minmax(0,1fr))!important;
+      gap:4px!important;
+      margin-top:9px!important;
+    }
+    .new-deck .promo-section .age-bands span{
+      padding:5px 3px!important;
+      text-align:center!important;
+      border-radius:6px!important;
+      background:#eef3f8!important;
+      color:#8a97a8!important;
+      font-size:9px!important;
+      line-height:1.1!important;
+      font-weight:700!important;
+    }
+    .new-deck .promo-section .age-bands span.active{
+      background:#e9efff!important;
+      color:#2563eb!important;
+      box-shadow:inset 0 -3px 0 #2563eb!important;
+    }
+    .new-deck .promo-section .gender-viz{
+      display:flex!important;
+      align-items:center!important;
+      gap:9px!important;
+      margin-top:9px!important;
+    }
+    .new-deck .promo-section .gender-ring{
+      position:relative!important;
+      display:grid!important;
+      place-items:center!important;
+      width:48px!important;
+      height:48px!important;
+      flex:0 0 48px!important;
+      border-radius:50%!important;
+      background:conic-gradient(#00a99d 0 94%,#e8edf4 94% 100%)!important;
+    }
+    .new-deck .promo-section .gender-ring::after{
+      content:""!important;
+      position:absolute!important;
+      inset:6px!important;
+      border-radius:50%!important;
+      background:#fff!important;
+    }
+    .new-deck .promo-section .gender-ring span{
+      position:relative!important;
+      z-index:1!important;
+      color:#00857c!important;
+      font-size:10px!important;
+      font-weight:800!important;
+    }
+    .new-deck .promo-section .gender-viz-copy{
+      display:flex!important;
+      flex-direction:column!important;
+      gap:2px!important;
+    }
+    .new-deck .promo-section .gender-viz-copy b{
+      color:#162033!important;
+      font-size:12px!important;
+      line-height:1.2!important;
+    }
+    .new-deck .promo-section .gender-viz-copy small{
+      margin:0!important;
+      color:#00857c!important;
+      font-size:10px!important;
+    }
+    .new-deck .promo-section .age-viz{
+      margin-top:10px!important;
+    }
+    .new-deck .promo-section .age-track{
+      position:relative!important;
+      height:8px!important;
+      margin:0 3px!important;
+      border-radius:999px!important;
+      background:#e8edf4!important;
+    }
+    .new-deck .promo-section .age-track::before,
+    .new-deck .promo-section .age-track::after{
+      content:""!important;
+      position:absolute!important;
+      top:50%!important;
+      width:6px!important;
+      height:6px!important;
+      border:2px solid #b8c4d2!important;
+      border-radius:50%!important;
+      background:#fff!important;
+      transform:translate(-50%,-50%)!important;
+    }
+    .new-deck .promo-section .age-track::before{left:0!important}
+    .new-deck .promo-section .age-track::after{left:100%!important}
+    .new-deck .promo-section .age-track i{
+      position:absolute!important;
+      left:24%!important;
+      width:52%!important;
+      height:100%!important;
+      border-radius:999px!important;
+      background:#2563eb!important;
+    }
+    .new-deck .promo-section .age-scale{
+      display:flex!important;
+      justify-content:space-between!important;
+      margin-top:6px!important;
+      color:#8a97a8!important;
+      font-size:9px!important;
+    }
+    .new-deck .promo-section .age-viz em{
+      display:block!important;
+      margin-top:5px!important;
+      color:#2563eb!important;
+      font-size:9px!important;
+      font-style:normal!important;
+      font-weight:700!important;
+    }
+    .new-deck .promo-section .promo-solution{max-width:980px!important}
+    .new-deck .promo-solution-card .promo-solution{
+      max-width:980px!important;
+      margin-top:0!important;
+      padding-top:0!important;
+      border-top:0!important;
+    }
+    .new-deck .promo-section .promo-solution-title{
+      max-width:940px!important;
+      margin:0 0 22px!important;
+    }
+    .new-deck .promo-solution-card .promo-solution-title{
+      max-width:940px!important;
+      margin:0 0 22px!important;
+    }
+    .new-deck .promo-section .promo-solution-title h2{
+      margin:0 0 12px!important;
+      color:#162033!important;
+      font-size:38px!important;
+      line-height:1.18!important;
+      font-weight:800!important;
+      letter-spacing:-.03em!important;
+    }
+    .new-deck .promo-solution-card .promo-solution-title h2{
+      margin:0 0 12px!important;
+      color:#162033!important;
+      font-size:38px!important;
+      line-height:1.18!important;
+      font-weight:800!important;
+      letter-spacing:-.03em!important;
+    }
+    .new-deck .promo-section .promo-solution-title p{
+      margin:0!important;
+      color:#526176!important;
+      font-size:17px!important;
+      line-height:1.55!important;
+      font-weight:500!important;
+    }
+    .new-deck .promo-solution-card .promo-solution-title p{
+      margin:0!important;
+      color:#526176!important;
+      font-size:17px!important;
+      line-height:1.55!important;
+      font-weight:500!important;
+    }
+    .new-deck .overview-subtitle{
+      max-width:980px!important;
+      font-weight:400!important;
+    }
+    .new-deck .overview-subtitle span{
+      display:block!important;
+      font-weight:400!important;
+    }
+    .new-deck .overview-subtitle strong{
+      font-weight:650!important;
+      color:#162033!important;
+    }
+    .new-deck .promo-section .promo-figure{max-width:900px!important}
+    .new-deck .promo-solution-card .promo-figure{max-width:900px!important}
+    .new-deck .promo-section .promo-visual-caption{max-width:900px!important;padding:14px 18px!important;font-size:17px!important}
+    .new-deck .slide-bottom,
+    .new-deck .evidence-strip,
+    .new-deck .name-inference{
+      display:flex!important;
+      align-items:flex-start!important;
+      gap:18px!important;
+      width:100%!important;
+      min-height:0!important;
+      margin:30px 0 0!important;
+      padding:18px 22px!important;
+      box-sizing:border-box!important;
+      background:#eef7f6!important;
+      border:0!important;
+      border-left:5px solid #00a99d!important;
+      border-radius:0!important;
+      box-shadow:none!important;
+      color:#35455a!important;
+      font-size:15px!important;
+      line-height:1.55!important;
+      font-weight:400!important;
+    }
+    .new-deck .slide-bottom strong,
+    .new-deck .evidence-strip strong,
+    .new-deck .name-inference strong{
+      flex:0 0 auto!important;
+      color:#00857c!important;
+      font-size:15px!important;
+      line-height:1.55!important;
+      font-weight:600!important;
+      white-space:nowrap!important;
+    }
+    .new-deck .slide-bottom span,
+    .new-deck .evidence-strip span,
+    .new-deck .name-inference span{
+      min-width:0!important;
+      color:#35455a!important;
+      font-size:15px!important;
+      line-height:1.55!important;
+      font-weight:400!important;
+    }
+    .new-deck>section.cover-slide .cover-path{
+      font-weight:400!important;
+      letter-spacing:.01em!important;
+    }
+    .new-deck>section.cover-slide .cover-path span{
+      font-weight:400!important;
+    }
+    .new-deck>section.cover-slide .cover-path i{
+      font-weight:800!important;
+    }
+    .new-deck .section-kicker{
+      display:block!important;
+      margin:0 0 14px!important;
+      color:#00a99d!important;
+      font-size:15px!important;
+      line-height:1.3!important;
+      font-weight:800!important;
+      letter-spacing:.06em!important;
+    }
+    .new-deck>section.deck-slide:not(.cover-slide) .slide-head,
+    .new-deck>.promo-solution-card .promo-solution-title{
+      max-width:940px!important;
+      margin:0 0 30px!important;
+    }
+    .new-deck>section.deck-slide:not(.cover-slide) .section-kicker,
+    .new-deck>.naming-segment>.section-kicker,
+    .new-deck>.promo-solution-card>.promo-solution>.section-kicker{
+      margin:0 0 14px!important;
+      font-size:15px!important;
+      line-height:1.3!important;
+      font-weight:760!important;
+      letter-spacing:.055em!important;
+    }
+    .new-deck>section.deck-slide:not(.cover-slide) .slide-head h2,
+    .new-deck>.naming-segment>.naming-title,
+    .new-deck>.promo-solution-card .promo-solution-title h2{
+      margin:0 0 12px!important;
+      color:#162033!important;
+      font-size:38px!important;
+      line-height:1.18!important;
+      font-weight:760!important;
+      letter-spacing:-.01em!important;
+    }
+    .new-deck>section.deck-slide:not(.cover-slide) .slide-head p,
+    .new-deck>.naming-segment>.section-subtitle,
+    .new-deck>.promo-solution-card .promo-solution-title p{
+      max-width:940px!important;
+      margin:0!important;
+      color:#526176!important;
+      font-size:17px!important;
+      line-height:1.55!important;
+      font-weight:400!important;
+      letter-spacing:0!important;
+    }
+    .new-deck>.naming-segment>.section-subtitle{
+      margin:0 0 30px!important;
+    }
+    .new-deck .overview-subtitle strong{
+      font-weight:600!important;
+    }
+    .new-deck .brand-education .slide-head{max-width:940px!important;margin-bottom:30px!important}
+    .new-deck .brand-education .media-grid{grid-template-columns:1fr 1fr .82fr!important;align-items:stretch!important}
+    .new-deck .brand-education .media-card,
+    .new-deck .brand-education .video-demo{min-height:330px!important}
+    .new-deck .brand-education .article-card{display:flex;flex-direction:column;gap:14px}
+    .new-deck .brand-education .article-copy{min-width:0}
+    .new-deck .brand-education .article-copy label{display:block;color:#00a99d;font-size:12px;font-weight:800}
+    .new-deck .brand-education .article-copy b{display:block;margin:8px 0 6px;font-size:20px;line-height:1.28;color:#162033}
+    .new-deck .brand-education .article-copy span{display:block;color:#627084;font-size:13px;line-height:1.55}
+    .new-deck .brand-education .article-figure{margin:0;border:1px solid #dbe3ee;border-radius:8px;background:#132d3a;overflow:hidden;box-shadow:0 12px 26px rgba(22,32,51,.1)}
+    .new-deck .brand-education .article-figure a{display:block}
+    .new-deck .brand-education .article-figure img{display:block;width:100%;height:236px;object-fit:cover;object-position:center top}
+    .new-deck .brand-education .article-figure figcaption{padding:9px 12px;color:#6d7b8d;background:#fff;font-size:12px;line-height:1.45}
+    .new-deck .brand-education .video-figure{margin:0;border:1px solid #dbe3ee;border-radius:8px;background:#132d3a;overflow:hidden;box-shadow:0 12px 26px rgba(22,32,51,.1)}
+    .new-deck .brand-education .video-figure a{display:block;background:#132d3a}
+    .new-deck .brand-education .video-figure img{display:block;width:100%;height:236px;object-fit:contain;object-position:center;background:#132d3a}
+    .new-deck .brand-education .video-figure figcaption{padding:9px 12px;color:#6d7b8d;background:#fff;font-size:12px;line-height:1.45}
+    .new-deck .brand-education .article-figure a{background:#132d3a}
+    .new-deck .brand-education .article-figure img{background:#132d3a}
+    /* 品牌内容卡：上方保留文字说明，下方以统一深色媒体底座承载配图与图注。 */
+    .new-deck .brand-education .article-card{
+      gap:0!important;
+      padding:0!important;
+      overflow:hidden!important;
+      background:#fff!important;
+    }
+    .new-deck .brand-education .article-copy{
+      padding:20px 22px 17px!important;
+      height:118px!important;
+      flex:0 0 118px!important;
+      box-sizing:border-box!important;
+    }
+    .new-deck .brand-education .article-figure,
+    .new-deck .brand-education .video-figure{
+      margin:0!important;
+      border:0!important;
+      border-radius:0!important;
+      box-shadow:none!important;
+      background:#132d3a!important;
+    }
+    .new-deck .brand-education .article-figure a,
+    .new-deck .brand-education .video-figure a{
+      padding:12px 12px 0!important;
+      background:#132d3a!important;
+    }
+    .new-deck .brand-education .article-figure img,
+    .new-deck .brand-education .video-figure img{
+      border-radius:4px 4px 0 0!important;
+      background:#132d3a!important;
+      height:277px!important;
+    }
+    .new-deck .brand-education .article-figure figcaption,
+    .new-deck .brand-education .video-figure figcaption{
+      padding:10px 12px 13px!important;
+      color:#c3d0dc!important;
+      background:#132d3a!important;
+    }
+    .new-deck .brand-education .article-figure,
+    .new-deck .brand-education .video-figure{
+      flex:1 1 auto!important;
+      min-height:289px!important;
+    }
+    .new-deck .brand-education .video-demo{
+      overflow:hidden!important;
+      border-style:solid!important;
+      border-color:#dbe3ee!important;
+      background:#132d3a!important;
+    }
+    .new-deck .brand-education .video-demo video{
+      display:block!important;
+      width:100%!important;
+      height:100%!important;
+      object-fit:cover!important;
+      background:#132d3a!important;
+    }
+    .new-deck .brand-education .video-demo{
+      display:flex!important;
+      flex-direction:column!important;
+      align-items:stretch!important;
+      justify-content:stretch!important;
+      padding:0!important;
+      overflow:hidden!important;
+      border-style:solid!important;
+      border-color:#dbe3ee!important;
+      background:#fff!important;
+      text-align:left!important;
+    }
+    .new-deck .brand-education .video-demo-copy{
+      height:118px!important;
+      flex:0 0 118px!important;
+      box-sizing:border-box!important;
+      padding:20px 22px 17px!important;
+    }
+    .new-deck .brand-education .video-demo-copy label,
+    .new-deck .brand-education .video-demo-copy b,
+    .new-deck .brand-education .video-demo-copy span{display:block!important}
+    .new-deck .brand-education .video-demo-copy label{color:#00a99d!important;font-size:12px!important;font-weight:800!important}
+    .new-deck .brand-education .video-demo-copy b{margin:8px 0 6px!important;color:#162033!important;font-size:20px!important;line-height:1.28!important}
+    .new-deck .brand-education .video-demo-copy span{padding:0!important;color:#627084!important;font-size:13px!important;line-height:1.55!important}
+    .new-deck .brand-education .video-play-prompt{display:inline!important;margin:0;padding:0;border:0;background:none;color:#c73535;font:inherit;text-decoration:underline;text-underline-offset:2px;cursor:pointer}
+    .new-deck .brand-education .video-frame{
+      display:flex!important;
+      flex:1 1 auto!important;
+      align-items:center!important;
+      justify-content:center!important;
+      min-height:289px!important;
+      padding:12px!important;
+      border-top:1px solid #dbe3ee!important;
+      background:#f5f6f8!important;
+    }
+    .new-deck .brand-education .video-demo video{
+      width:100%!important;
+      height:auto!important;
+      max-height:100%!important;
+      object-fit:contain!important;
+      border-radius:4px!important;
+      background:#f5f6f8!important;
+    }
+    .new-deck>section.cover-slide .cover-credit{
+      left:64px!important;
+      right:64px!important;
+      bottom:48px!important;
+      color:#526176!important;
+      font-size:14px!important;
+      font-weight:500!important;
+    }
+    /* 潜在用户-2：左侧陈列画像与测试证据，右侧独立呈现视觉结论。 */
+    .new-deck .promo-section .promo-notes{
+      grid-template-columns:minmax(0,1.22fr) minmax(320px,.78fr)!important;
+      gap:18px!important;
+      align-items:stretch!important;
+    }
+    .new-deck .promo-section .promo-evidence-stack{
+      display:grid!important;
+      gap:0!important;
+      align-content:start!important;
+      min-width:0!important;
+      padding:20px!important;
+      border:1px solid #d8e0ea!important;
+      border-radius:8px!important;
+      background:#f3f5f7!important;
+      box-sizing:border-box!important;
+    }
+    .new-deck .promo-section .evidence-group-head{
+      display:flex!important;
+      align-items:baseline!important;
+      justify-content:space-between!important;
+      gap:12px!important;
+      margin-bottom:18px!important;
+      padding-bottom:12px!important;
+      border-bottom:1px solid #d8e0ea!important;
+    }
+    .new-deck .promo-section .evidence-group-head b{color:#162033!important;font-size:18px!important;line-height:1.25!important;font-weight:760!important}
+    .new-deck .promo-section .evidence-group-head span{color:#728095!important;font-size:11px!important;line-height:1.4!important}
+    .new-deck .promo-section .promo-evidence-stack .persona-card,
+    .new-deck .promo-section .promo-evidence-stack .test-card{
+      min-width:0!important;
+      padding:0!important;
+      border:0!important;
+      border-radius:0!important;
+      background:transparent!important;
+      box-shadow:none!important;
+    }
+    .new-deck .promo-section .promo-evidence-stack .test-card{
+      margin-top:16px!important;
+      padding-top:16px!important;
+      border-top:1px solid #d8e0ea!important;
+    }
+    .new-deck .promo-section .promo-evidence-stack .persona-title h3,
+    .new-deck .promo-section .promo-evidence-stack .test-card-head h3{
+      color:#263348!important;
+      font-size:15px!important;
+      line-height:1.35!important;
+      font-weight:720!important;
+    }
+    .new-deck .promo-section .promo-evidence-stack .persona-title span,
+    .new-deck .promo-section .promo-evidence-stack .test-card-head span{
+      color:#7a8798!important;
+      font-size:10px!important;
+      font-weight:400!important;
+    }
+    .new-deck .promo-section .visual-conclusion{
+      grid-column:auto!important;
+      display:flex!important;
+      flex-direction:column!important;
+      min-width:0!important;
+      min-height:100%!important;
+      padding:22px!important;
+      border:1px solid #dbe3ee!important;
+      border-radius:8px!important;
+      background:#fff!important;
+      box-sizing:border-box!important;
+    }
+    .new-deck .promo-section .visual-conclusion .promo-note-label{margin:0 0 10px!important}
+    .new-deck .promo-section .visual-conclusion h3{
+      margin:0!important;
+      color:#162033!important;
+      font-size:22px!important;
+      line-height:1.28!important;
+    }
+    .new-deck .promo-section .visual-conclusion>p{
+      margin:10px 0 18px!important;
+      color:#627084!important;
+      font-size:13px!important;
+      line-height:1.65!important;
+    }
+    .new-deck .promo-section .visual-systems{
+      display:grid!important;
+      grid-template-columns:minmax(0,1fr) 28px minmax(0,1fr)!important;
+      gap:10px!important;
+      align-items:stretch!important;
+      margin-top:auto!important;
+    }
+    .new-deck .promo-section .visual-system{
+      padding:14px!important;
+      border-radius:7px!important;
+    }
+    .new-deck .promo-section .visual-system small{display:block!important;margin-bottom:8px!important;font-size:10px!important;font-weight:800!important}
+    .new-deck .promo-section .visual-system b{display:block!important;font-size:16px!important;line-height:1.35!important}
+    .new-deck .promo-section .visual-system span{display:block!important;margin-top:7px!important;font-size:11px!important;line-height:1.5!important}
+    .new-deck .promo-section .visual-system.old{background:#effaf6!important;color:#287b6e!important}
+    .new-deck .promo-section .visual-system.new{background:#fff4ea!important;color:#c56b31!important}
+    .new-deck .promo-section .visual-systems>i{
+      display:grid!important;
+      place-items:center!important;
+      color:#e98648!important;
+      font-size:22px!important;
+      font-style:normal!important;
+      font-weight:700!important;
+    }
+    .new-deck .promo-section .visual-palette{
+      display:flex!important;
+      gap:7px!important;
+      margin-top:18px!important;
+    }
+    .new-deck .promo-section .visual-palette span{display:block!important;height:24px!important;flex:1!important;border-radius:4px!important}
+    .new-deck .promo-section .visual-palette span:nth-child(1){background:#e98648!important}
+    .new-deck .promo-section .visual-palette span:nth-child(2){background:#f1b58e!important}
+    .new-deck .promo-section .visual-palette span:nth-child(3){background:#f8dfce!important}
+    .new-deck .promo-section .visual-palette span:nth-child(4){background:#fdf5ef!important;border:1px solid #f4e7dd!important}
+    .new-deck .promo-section .visual-conclusion-foot{
+      margin:16px 0 0!important;
+      padding-top:14px!important;
+      border-top:1px solid #edf0f4!important;
+      color:#8a542f!important;
+      font-size:12px!important;
+      font-weight:700!important;
+      line-height:1.5!important;
+    }
+    .new-deck .promo-section .persona-behavior,
+    .new-deck .promo-section .test-insight{
+      display:flex!important;
+      gap:9px!important;
+      align-items:flex-start!important;
+      margin-top:11px!important;
+      padding:10px 12px!important;
+      border-radius:6px!important;
+      font-size:11px!important;
+      line-height:1.55!important;
+    }
+    .new-deck .promo-section .promo-evidence-stack .persona-note{
+      max-width:none!important;
+      margin:11px 0 0!important;
+      padding:10px 12px!important;
+      color:#24685f!important;
+      background:#effaf6!important;
+      border-left:3px solid #00a99d!important;
+      border-radius:6px!important;
+      font-size:11px!important;
+      line-height:1.55!important;
+      box-sizing:border-box!important;
+    }
+    .new-deck .promo-section .persona-behavior{
+      color:#24685f!important;
+      background:#effaf6!important;
+      border-left:3px solid #00a99d!important;
+    }
+    .new-deck .promo-section .test-insight{
+      color:#99512a!important;
+      background:#fff4ea!important;
+      border-left:3px solid #e98648!important;
+    }
+    .new-deck .promo-section .persona-behavior b,
+    .new-deck .promo-section .test-insight b{
+      flex:0 0 auto!important;
+      font-size:10px!important;
+      line-height:1.7!important;
+      font-weight:800!important;
+      white-space:nowrap!important;
+    }
+    .new-deck .promo-section .persona-behavior span,
+    .new-deck .promo-section .test-insight span{min-width:0!important}
+    .new-deck>section.flow-overview{height:auto!important;min-height:0!important;overflow:visible!important}
+    .new-deck .flow-overview .slide-head{margin-bottom:24px!important}
+    .new-deck .flow-overview .flow-current-label{display:block;margin-bottom:12px;color:#009e92;font-size:13px;font-weight:700;letter-spacing:.05em}
+    .new-deck .flow-overview .flow-current{
+      width:100%;
+      margin:0;
+      overflow:hidden;
+      border:1px solid #dbe3ee;
+      border-radius:8px;
+      background:#192f3c;
+    }
+    .new-deck .flow-overview .flow-current a{
+      display:block;
+      width:100%;
+      line-height:0;
+      background:#192f3c;
+    }
+    .new-deck .flow-overview .flow-current img{
+      display:block;
+      width:100%;
+      height:auto;
+    }
+    .new-deck .flow-overview .flow-current figcaption{
+      padding:9px 14px 11px;
+      color:#c2d2dc;
+      font-size:12px;
+      line-height:1.45;
+      background:#192f3c;
+    }
+    .new-deck .flow-overview .flow-issues{
+      margin-top:20px;
+      padding:18px 20px 20px;
+      border:1px solid #dbe3ee;
+      border-radius:8px;
+      background:#f7f9fc;
+    }
+    .new-deck .flow-overview .flow-issues>strong{
+      display:block;
+      margin-bottom:12px;
+      color:#263348;
+      font-size:16px;
+      line-height:1.35;
+    }
+    .new-deck .flow-overview .flow-issue-grid{
+      display:grid;
+      grid-template-columns:repeat(4,minmax(0,1fr));
+      gap:16px;
+    }
+    .new-deck .flow-overview .flow-issue-grid article{
+      min-width:0;
+      padding-left:12px;
+      border-left:2px solid #a8bacd;
+    }
+    .new-deck .flow-overview .flow-issue-grid b{
+      display:block;
+      color:#162033;
+      font-size:13px;
+      line-height:1.35;
+    }
+    .new-deck .flow-overview .flow-issue-grid p{
+      margin:5px 0 0;
+      color:#627084;
+      font-size:12px;
+      line-height:1.55;
+    }
+    .new-deck .flow-overview .flow-module{
+      margin-top:48px;
+      padding-top:36px;
+      border-top:1px solid #dbe3ee;
+    }
+    .new-deck .flow-overview .flow-id-module,
+    .new-deck .flow-overview .flow-submit-module{padding-top:24px;border-top:0}
+    .new-deck .flow-overview .flow-module-head span{
+      display:block;
+      margin-bottom:10px;
+      color:#009e92;
+      font-size:13px;
+      font-weight:700;
+      letter-spacing:.05em;
+    }
+    .new-deck .flow-overview .flow-module-head h3{
+      margin:0 0 9px;
+      color:#162033;
+      font-size:27px;
+      line-height:1.3;
+      font-weight:700;
+    }
+    .new-deck .flow-overview .flow-module-head p{
+      max-width:900px;
+      margin:0;
+      color:#526176;
+      font-size:15px;
+      line-height:1.6;
+      font-weight:400;
+    }
+    .new-deck .flow-module .flow-module-body{
+      display:grid;
+      grid-template-columns:minmax(0,.78fr) minmax(0,1.22fr);
+      gap:20px;
+      align-items:stretch;
+      margin-top:30px;
+    }
+    .new-deck .flow-module .flow-module-notes{
+      padding:24px;
+      border:1px solid #dbe3ee;
+      border-radius:8px;
+      background:#f7f9fc;
+    }
+    .new-deck .flow-module .flow-module-notes h3{
+      margin:0 0 16px;
+      color:#263348;
+      font-size:18px;
+      line-height:1.35;
+    }
+    .new-deck .flow-module .flow-module-notes article{
+      padding:14px 0;
+      border-top:1px solid #dbe3ee;
+    }
+    .new-deck .flow-module .flow-module-notes article b{
+      display:block;
+      color:#162033;
+      font-size:15px;
+      line-height:1.35;
+    }
+    .new-deck .flow-module .flow-module-notes article p{
+      margin:6px 0 0;
+      color:#627084;
+      font-size:13px;
+      line-height:1.6;
+    }
+    .new-deck .flow-module .flow-asset-slot{
+      display:grid;
+      place-items:center;
+      min-height:400px;
+      padding:24px;
+      border:1px dashed #b9c7d8;
+      border-radius:8px;
+      background:#f8fbff;
+      color:#7b899b;
+      text-align:center;
+      font-size:15px;
+      line-height:1.6;
+      box-sizing:border-box;
+    }
+    .new-deck .flow-module .flow-asset-slot b{
+      display:block;
+      margin-bottom:8px;
+      color:#526176;
+      font-size:17px;
+    }
+    .new-deck .flow-contact-unified{margin-top:30px}
+    .new-deck .flow-contact-gallery{display:grid;grid-template-columns:minmax(350px,.8fr) minmax(610px,1.4fr);gap:18px;align-items:stretch}
+    .new-deck .flow-contact-visual{display:grid;grid-template-columns:170px minmax(0,1fr);gap:17px;align-items:center;min-width:0;padding:16px;border:1px solid #dbe3ee;border-radius:8px;background:#f7f9fc}
+    .new-deck .flow-contact-copy{min-width:0}
+    .new-deck .flow-contact-copy small{display:block;margin-bottom:9px;color:#009e92;font-size:12px;font-weight:700;line-height:1.4}
+    .new-deck .flow-contact-copy h4{margin:0 0 11px;color:#162033;font-size:19px;line-height:1.35}
+    .new-deck .flow-contact-copy p{margin:0;color:#526176;font-size:14px;line-height:1.65}
+    .new-deck .flow-contact-copy p+p{margin-top:10px}
+    .new-deck .flow-contact-caveat{margin:16px 0 0;color:#627084;font-size:12px;line-height:1.6}
+    .new-deck .flow-submit-module .flow-pair-figure{min-width:0;margin:0;overflow:hidden;border:1px solid #dbe3ee;border-radius:6px;background:#fff}
+    .new-deck .flow-submit-module .flow-pair-figure a{display:block;line-height:0}
+    .new-deck .flow-submit-module .flow-pair-figure img{display:block;width:100%;height:auto}
+    .new-deck .flow-contact-visual.has-call-notification{grid-template-columns:348px minmax(0,1fr)}
+    .new-deck .flow-contact-figure-pair{display:grid;grid-template-columns:repeat(2,170px);gap:8px;min-width:0}
+    .new-deck .flow-contact-figure-pair .flow-pair-figure{min-width:0;margin:0;overflow:hidden;border:1px solid #dbe3ee;border-radius:6px;background:#fff}
+    .new-deck .flow-contact-figure-pair .flow-pair-figure a{display:block;line-height:0}
+    .new-deck .flow-contact-figure-pair .flow-pair-figure img{display:block;width:100%;height:auto}
+    .new-deck .flow-overview .flow-id-module{padding-top:24px}
+    .new-deck .flow-id-layout{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:22px;align-items:start;margin-top:18px}
+    .new-deck .flow-id-evidence-list{display:flex;flex-direction:column;justify-content:space-between;gap:12px;min-width:0}
+    .new-deck .flow-id-evidence-card{display:flex;flex:none;align-items:flex-start;min-width:0;padding:14px;border:1px solid #e0e6ed;border-left:3px solid #b8d8d3;border-radius:8px;background:#fff;box-shadow:0 5px 16px rgba(22,32,51,.035)}
+    .new-deck .flow-id-evidence-copy{min-width:0}
+    .new-deck .flow-id-evidence-copy h4{margin:0 0 10px;color:#162033;font-size:16px;line-height:1.35}
+    .new-deck .flow-id-evidence-pair{display:grid;grid-template-columns:74px minmax(0,1fr);gap:8px;align-items:start;padding:0;border-radius:0;background:transparent}
+    .new-deck .flow-id-evidence-pair+ .flow-id-evidence-pair{margin-top:7px;padding-top:0;border-top:0;background:transparent}
+    .new-deck .flow-id-evidence-pair strong{display:block;justify-self:start;margin:0;padding:0;border-radius:0;background:transparent;color:#667382!important;font-size:11px;line-height:1.45}
+    .new-deck .flow-id-evidence-pair+ .flow-id-evidence-pair strong{background:transparent;color:#007f76!important}
+    .new-deck .flow-id-evidence-pair p{margin:0;color:#526176;font-size:13px;line-height:1.55}
+    .new-deck .flow-id-full-figure{width:100%;max-width:360px;min-width:0;align-self:start;margin:0 auto;overflow:hidden;border:1px solid #dbe3ee;border-radius:8px;background:#fff}
+    .new-deck .flow-id-full-figure a{display:block;line-height:0}
+    .new-deck .flow-id-full-figure img{display:block;width:100%;height:auto}
+    .new-deck .flow-id-full-figure figcaption{padding:9px 12px;color:#627084;font-size:12px;line-height:1.5;background:#fff}
+    .new-deck .flow-id-evidence-caveat{margin:12px 0 0;color:#627084;font-size:12px;line-height:1.6}
+    .new-deck .flow-safety-figure{width:100%;max-width:680px;margin:0 auto;overflow:hidden;border:1px solid #dbe3ee;border-radius:8px;background:#192f3c}
+    .new-deck .flow-safety-figure a{display:block;line-height:0}
+    .new-deck .flow-safety-figure img{display:block;width:100%;height:auto}
+    .new-deck .flow-safety-figure figcaption{padding:11px 15px;color:#627084;font-size:12px;line-height:1.5;background:#fff}
+    .new-deck .flow-safety-module{margin-top:30px!important;padding-top:24px!important;border-top:0!important}
+    .new-deck .flow-safety-module .flow-module-head h3{margin-bottom:5px}
+    .new-deck .flow-safety-module .flow-module-head p{line-height:1.45}
+    .new-deck .flow-safety-module .flow-module-body{grid-template-columns:minmax(0,.65fr) minmax(0,1.35fr);margin-top:18px;gap:20px}
+    .new-deck .flow-safety-module .flow-module-notes{display:flex;flex-direction:column;width:min(100%,600px);margin:0;padding:16px;box-sizing:border-box}
+    .new-deck .flow-safety-module .flow-module-notes h3{margin-bottom:8px;font-size:16px}
+    .new-deck .flow-safety-module .flow-module-notes article{display:flex;flex:1 1 0;flex-direction:column;justify-content:center;padding:12px 0}
+    .new-deck .flow-safety-module .flow-module-notes article p{margin-top:4px;font-size:12px;line-height:1.45}
+    .new-deck .flow-safety-module .flow-safety-figure{max-width:none}
+    .new-deck .flow-safety-module .flow-safety-figure figcaption{padding:8px 12px}
+    .new-deck .entry-stack{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;align-items:stretch}
+    .new-deck .entry-stack-item{display:flex;flex-direction:column;min-width:0;overflow:hidden;border:1px solid #dbe3ee;border-radius:8px;background:#fff}
+    .new-deck .entry-stack-head{padding:23px 26px 20px;border-bottom:1px solid #e3e9f1}
+    .new-deck .entry-stack-head small{display:block;margin-bottom:7px;color:#009e92;font-size:13px;font-weight:700;letter-spacing:.04em}
+    .new-deck .entry-stack-head h3{margin:0 0 8px;color:#162033;font-size:18px;line-height:1.35;font-weight:700}
+    .new-deck .entry-stack-head p{margin:0;color:#627084;font-size:15px;line-height:1.6;font-weight:400}
+    .new-deck .entry-stack-figure{display:grid;place-items:center;flex:1;min-height:0;margin:0;padding:16px;background:#192f3c}
+    .new-deck .entry-stack-figure a{display:block;width:100%;line-height:0}
+    .new-deck .entry-stack-figure img{display:block;width:100%;height:auto;max-height:520px;object-fit:contain}
+    .new-deck .entry-stack-placeholder{display:grid;place-items:center;flex:1;min-height:0;margin:16px;border:1px dashed #b9c7d8;border-radius:8px;background:#f8fbff;color:#627084;text-align:center;font-size:15px;line-height:1.6}
+    .new-deck .entry-stack-placeholder strong{display:block;margin-bottom:8px;color:#34445a;font-size:18px}
+    .new-deck>section#offline-new{height:auto!important;min-height:0!important;max-height:none!important;overflow:visible!important}
+    .new-deck #offline-new .lender-flow-head{display:flex;align-items:end;justify-content:space-between;gap:20px;margin-top:32px}
+    .new-deck #offline-new .lender-flow-head h3{margin:0;color:#162033;font-size:21px;line-height:1.4}
+    .new-deck #offline-new .lender-flow-head p{margin:0;color:#627084;font-size:13px;line-height:1.5}
+    .new-deck #offline-new .lender-flow-figure{margin:14px 0 0;overflow:hidden;border:1px solid #dbe3ee;border-radius:8px;background:#192f3c}
+    .new-deck #offline-new .lender-flow-scroll{overflow-x:auto}
+    .new-deck #offline-new .lender-flow-scroll a{display:block;width:100%;line-height:0}
+    .new-deck #offline-new .lender-flow-scroll img{display:block;width:100%;height:auto}
+    .new-deck #offline-new .lender-flow-figure figcaption{padding:10px 14px;background:#fff;color:#627084;font-size:12px;line-height:1.55}
+    .new-deck #offline-new .lender-scope{display:flex;gap:14px;margin-top:12px;padding:13px 16px;border-radius:8px;background:#f1f5f9;color:#526176;font-size:13px;line-height:1.55}
+    .new-deck #offline-new .lender-scope strong{flex:0 0 auto;color:#34445a}
+    .new-deck #offline-new .lender-analysis-head{display:flex;align-items:baseline;justify-content:space-between;gap:18px;margin:26px 0 10px}
+    .new-deck #offline-new .lender-analysis-head h3{margin:0;color:#162033;font-size:21px;line-height:1.4}
+    .new-deck #offline-new .lender-analysis-head span{color:#627084;font-size:13px}
+    .new-deck #offline-new .lender-pairs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+    .new-deck #offline-new .lender-pair{display:grid;grid-template-columns:32px minmax(0,.92fr) minmax(0,1.08fr);grid-template-rows:1fr;min-width:0;overflow:hidden;border:1px solid #dfe5eb;border-radius:8px;background:#fff;box-shadow:0 4px 14px rgba(22,32,51,.035)}
+    .new-deck #offline-new .lender-pair-number{display:grid;place-items:center;grid-row:1;background:#f2f4f6;color:#778493;font-size:12px;font-weight:750}
+    .new-deck #offline-new .lender-pair-problem,.new-deck #offline-new .lender-pair-solution{min-width:0;padding:12px 14px}
+    .new-deck #offline-new .lender-pair-problem{background:#fff}
+    .new-deck #offline-new .lender-pair-solution{border-top:0;border-left:1px solid #e2e7eb;background:#f3f7f6}
+    .new-deck #offline-new .lender-pair small{display:block;margin:0 0 4px;color:#75808d;font-size:10px;font-weight:700;letter-spacing:.04em}
+    .new-deck #offline-new .lender-pair-solution small{color:#007f76}
+    .new-deck #offline-new .lender-pair h4{display:block;margin:0;color:#162033;font-size:14px;line-height:1.35}
+    .new-deck #offline-new .lender-pair p{margin:5px 0 0;color:#526176;font-size:12px;line-height:1.5}
+    .new-deck #offline-new .lender-platform-context{margin-top:24px;padding:17px 20px;border:1px solid #dce6e4;border-left:4px solid #6aa49c;border-radius:8px;background:#f7faf9}
+    .new-deck #offline-new .lender-platform-context small{display:block;color:#007f76;font-size:11px;font-weight:800;letter-spacing:.05em}
+    .new-deck #offline-new .lender-platform-context h3{margin:5px 0 7px;color:#162033;font-size:18px;line-height:1.4}
+    .new-deck #offline-new .lender-platform-context p{margin:0;color:#526176;font-size:13px;line-height:1.65}
+    .new-deck #offline-new .lender-recommendation{margin-top:22px;padding:20px 22px;border:1px solid #f1d2ba;border-top:5px solid #c45b16;border-left:5px solid #c45b16;border-radius:9px;background:linear-gradient(135deg,#fff8f1 0%,#fff 72%)}
+    .new-deck #offline-new .lender-recommendation-head{display:flex;align-items:flex-start;justify-content:space-between;gap:18px}
+    .new-deck #offline-new .lender-recommendation-label{display:inline-flex;align-items:center;gap:7px;margin-bottom:9px;padding:7px 12px;border:1px solid #a7460c;border-radius:6px;background:#b94f10;color:#fff;font-size:12px;font-weight:850;letter-spacing:.035em;box-shadow:0 3px 8px rgba(151,65,13,.2)}
+    .new-deck #offline-new .lender-recommendation-label::before{content:"重点";display:inline-grid;place-items:center;min-width:28px;height:19px;padding:0 4px;border-radius:3px;background:#fff;color:#a7460c;font-size:10px;line-height:1}
+    .new-deck #offline-new .lender-recommendation-head h3{margin:0;color:#162033;font-size:21px;line-height:1.35}
+    .new-deck #offline-new .lender-recommendation-head p{max-width:760px;margin:7px 0 0;color:#526176;font-size:13px;line-height:1.55}
+    .new-deck #offline-new .lender-recommendation-condition{flex:none;padding:8px 11px;border:1px solid #dbe3ee;border-radius:7px;background:#fff;color:#627084;font-size:11px;line-height:1.45;text-align:center}
+    .new-deck #offline-new .lender-recommendation-impact{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-top:14px;padding:11px 13px;border-radius:7px;background:#fff5e9;color:#8e5525;font-size:12px;line-height:1.45}
+    .new-deck #offline-new .lender-recommendation-impact b{margin-right:3px;color:#8a4c1c;font-size:11px}
+    .new-deck #offline-new .lender-recommendation-impact span{font-weight:700}
+    .new-deck #offline-new .lender-recommendation-impact i{color:#d18744;font-style:normal;font-weight:800}
+    .new-deck #offline-new .lender-recommendation-flow{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:16px}
+    .new-deck #offline-new .lender-recommendation-step{position:relative;min-width:0;padding:13px 15px;border:1px solid #e0e8ed;border-radius:7px;background:#fff}
+    .new-deck #offline-new .lender-recommendation-step:not(:last-child)::after{content:"→";position:absolute;top:50%;right:-13px;z-index:1;color:#c45b16;font-size:17px;font-weight:800;transform:translate(50%,-50%)}
+    .new-deck #offline-new .lender-recommendation-step small{display:block;margin-bottom:5px;color:#a65116;font-size:10px;font-weight:800;letter-spacing:.05em}
+    .new-deck #offline-new .lender-recommendation-step strong{display:block;color:#162033;font-size:14px;line-height:1.35}
+    .new-deck #offline-new .lender-recommendation-step span{display:block;margin-top:5px;color:#627084;font-size:12px;line-height:1.5}
+    .new-deck #offline-new .lender-recommendation-outcomes{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-top:13px}
+    .new-deck #offline-new .lender-recommendation-outcomes b{margin-right:3px;color:#34445a;font-size:12px}
+    .new-deck #offline-new .lender-recommendation-outcomes span{padding:6px 9px;border:1px solid #f0d0b7;border-radius:999px;background:#fff1e5;color:#8d4211;font-size:11px;font-weight:700}
+    @media(max-width:800px){
+      .new-deck .flow-safety-module .flow-module-notes{width:100%}
+      .new-deck #offline-new .lender-recommendation-head{display:block}
+      .new-deck #offline-new .lender-recommendation-condition{display:inline-block;margin-top:10px;text-align:left}
+      .new-deck #offline-new .lender-recommendation-impact{gap:6px}
+      .new-deck #offline-new .lender-recommendation-flow{grid-template-columns:1fr;gap:10px}
+      .new-deck #offline-new .lender-recommendation-step:not(:last-child)::after{content:"↓";top:auto;right:50%;bottom:-13px;transform:translate(50%,50%)}
+    }
+    /* 客服话术：左侧规范，右侧沿通话顺序展示可执行案例。 */
+    .new-deck .service-scripts .service-mission{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:10px 2px 12px;border-bottom:1px solid #e1e8eb;background:transparent}
+    .new-deck .service-scripts .service-mission-core{display:flex;align-items:center;flex-wrap:wrap;gap:14px}
+    .new-deck .service-scripts .service-mission-core span{color:#526176;font-size:12px}
+    .new-deck .service-scripts .service-mission-core strong{color:#00857c;font-size:18px;line-height:1.4}
+    .new-deck .service-scripts .service-mission-core i{color:#8aa49f;font-size:16px;font-style:normal}
+    .new-deck .service-scripts .service-mission p{margin:0;color:#697789;font-size:12px;line-height:1.6}
+    .new-deck .service-scripts .service-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.08fr);gap:22px;align-items:start;margin-top:20px}
+    .new-deck .service-scripts .service-standards{min-width:0;padding:20px 22px;border-radius:8px;background:#f5f7fa}
+    .new-deck .service-scripts .service-column-title{margin:0 0 16px;color:#162033;font-size:20px;line-height:1.4}
+    .new-deck .service-scripts .service-standards-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 24px}
+    .new-deck .service-scripts .service-standard{min-width:0;padding:15px 0;border-top:1px solid #dbe3ee}
+    .new-deck .service-scripts .service-standard:last-child{padding-bottom:0}
+    .new-deck .service-scripts .service-standard-head{display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:4px 12px;margin-bottom:8px}
+    .new-deck .service-scripts .service-standard h4{margin:0;color:#00857c;font-size:17px;line-height:1.4}
+    .new-deck .service-scripts .service-standard-head span{color:#627084;font-size:11px;line-height:1.5}
+    .new-deck .service-scripts .service-topics{display:flex;flex-wrap:wrap;gap:5px 14px;margin:0;padding:0;list-style:none;color:#526176;font-size:13px;line-height:1.65}
+    .new-deck .service-scripts .service-topics li::before{content:"";display:inline-block;width:4px;height:4px;margin-right:6px;vertical-align:middle;border-radius:50%;background:#8aa49f}
+    .new-deck .service-scripts .service-standard-forbidden h4{color:#a4553f}
+    .new-deck .service-scripts .service-standard-forbidden .service-topics li::before{background:#bf8a77}
+    .new-deck .service-scripts .service-action-path{display:grid;grid-template-columns:1fr 1fr;gap:7px 12px;margin:0;padding:0;list-style:none}
+    .new-deck .service-scripts .service-action-path li{color:#526176;font-size:13px;line-height:1.55}
+    .new-deck .service-scripts .service-action-path b{display:inline-grid;place-items:center;width:20px;height:20px;margin-right:7px;border-radius:50%;background:#e0eeec;color:#00857c;font-size:11px}
+    .new-deck .service-scripts .service-examples{min-width:0}
+    .new-deck .service-scripts .service-dialogue{display:grid;gap:12px;margin:0;padding:0;list-style:none}
+    .new-deck .service-scripts .service-dialogue>li{position:relative;display:grid;grid-template-columns:28px minmax(0,1fr);gap:12px;min-width:0}
+    .new-deck .service-scripts .service-dialogue>li:not(:last-child)::before{content:"";position:absolute;left:13px;top:29px;bottom:-12px;border-left:1px solid #cddfdc}
+    .new-deck .service-scripts .service-step-number{position:relative;display:grid;place-items:center;width:28px;height:28px;margin-top:1px;border-radius:50%;background:#e5f1ef;color:#00857c;font-size:12px;font-weight:700}
+    .new-deck .service-scripts .service-speech{min-width:0;padding:11px 15px 12px;border:1px solid #dbe3ee;border-radius:0 8px 8px 8px;background:#fff}
+    .new-deck .service-scripts .service-speech h4{margin:0 0 5px;color:#162033;font-size:15px;line-height:1.45}
+    .new-deck .service-scripts .service-speech blockquote{margin:0;color:#526176;font-size:13px;line-height:1.65}
+    .new-deck .service-scripts .service-speech .service-state{display:inline-block;margin-top:7px;padding:4px 9px;border-radius:4px;background:#eef7f6;color:#00857c;font-size:12px;font-weight:700;line-height:1.4}
+    .new-deck .service-scripts .service-template-note{margin:10px 0 0 40px;color:#627084;font-size:11px;line-height:1.55}
+    .new-deck .service-scripts .service-governance{display:flex;align-items:center;gap:16px;margin-top:18px;padding:12px 2px 0;border-top:1px solid #e1e8eb;background:transparent}
+    .new-deck .service-scripts .service-governance>strong{flex:0 0 auto;color:#00857c;font-size:13px}
+    .new-deck .service-scripts .service-governance ol{display:flex;flex-wrap:wrap;gap:7px 0;align-items:center;margin:0;padding:0;list-style:none}
+    .new-deck .service-scripts .service-governance li{color:#526176;font-size:13px;line-height:1.6}
+    .new-deck .service-scripts .service-governance li:not(:last-child)::after{content:"→";margin:0 17px;color:#9aaabd}
+    @media(max-width:900px){
+      .new-deck .service-scripts .service-layout{grid-template-columns:1fr}
+      .new-deck .service-scripts .service-standards-list{grid-template-columns:1fr 1fr;gap:0 24px}
+      .new-deck .service-scripts .service-mission{align-items:flex-start;flex-direction:column;gap:8px}
+    }
+    @media(max-width:560px){
+      .new-deck .service-scripts .service-standards{padding:18px}
+      .new-deck .service-scripts .service-standards-list{grid-template-columns:1fr}
+      .new-deck .service-scripts .service-mission{padding:16px}
+      .new-deck .service-scripts .service-mission-core{gap:9px}
+      .new-deck .service-scripts .service-mission-core span{flex-basis:100%}
+      .new-deck .service-scripts .service-mission-core strong{font-size:20px}
+      .new-deck .service-scripts .service-dialogue>li{grid-template-columns:24px minmax(0,1fr);gap:9px}
+      .new-deck .service-scripts .service-step-number{width:24px;height:24px}
+      .new-deck .service-scripts .service-dialogue>li:not(:last-child)::before{left:11px;top:25px}
+      .new-deck .service-scripts .service-speech{padding:10px 12px}
+      .new-deck .service-scripts .service-template-note{margin-left:33px}
+      .new-deck .service-scripts .service-governance{align-items:flex-start;flex-direction:column;gap:7px;padding:15px 16px}
+    }
+    @media(max-width:800px){
+      .new-deck .flow-overview .flow-current a{overflow-x:auto}
+      .new-deck .flow-overview .flow-current img{width:max(100%,760px)}
+      .new-deck .promo-section .test-figure a,
+      .new-deck .promo-section .promo-figure a,
+      .new-deck .flow-safety-figure a{overflow-x:auto;overscroll-behavior-x:contain}
+      .new-deck .promo-section .test-figure img,
+      .new-deck .promo-section .promo-figure img,
+      .new-deck .flow-safety-figure img{width:max(100%,760px);max-width:none}
+      .new-deck .flow-safety-module .flow-module-body{grid-template-columns:1fr}
+      .new-deck .flow-overview .flow-issue-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .new-deck .flow-module .flow-module-body{grid-template-columns:1fr}
+      .new-deck .flow-id-layout{grid-template-columns:1fr}
+      .new-deck .flow-id-full-figure{max-width:min(100%,360px)}
+      .new-deck .flow-id-evidence-list{gap:14px}
+      .new-deck .flow-id-evidence-card{padding:14px 16px}
+      .new-deck .flow-id-evidence-pair{display:block}
+      .new-deck .flow-id-evidence-pair strong{margin-bottom:5px;line-height:1.4}
+      .new-deck .flow-module .flow-asset-slot{min-height:240px}
+      .new-deck .entry-stack{grid-template-columns:1fr}
+      .new-deck .entry-stack-figure{padding:10px}
+      .new-deck .entry-stack-placeholder{min-height:240px}
+      .new-deck #offline-new .lender-flow-head,.new-deck #offline-new .lender-analysis-head{display:block}
+      .new-deck #offline-new .lender-flow-head p,.new-deck #offline-new .lender-analysis-head span{display:block;margin-top:5px}
+      .new-deck #offline-new .lender-flow-scroll a{width:900px}
+      .new-deck #offline-new .lender-pairs{grid-template-columns:1fr}
+      .new-deck #offline-new .lender-scope{display:block}
+      .new-deck #offline-new .lender-scope strong{display:block;margin-bottom:3px}
+      .new-deck #offline-new .lender-pair{grid-template-columns:36px minmax(0,1fr);grid-template-rows:auto 1fr}
+      .new-deck #offline-new .lender-pair-number{grid-row:1 / span 2}
+      .new-deck #offline-new .lender-pair-problem,.new-deck #offline-new .lender-pair-solution{padding:10px 12px}
+      .new-deck #offline-new .lender-pair-solution{border-left:0;border-top:1px solid #dbe3ee}
+    }
+    @media(max-width:680px){
+      .new-deck .flow-overview .flow-issue-grid{grid-template-columns:1fr}
+      .new-deck .flow-contact-visual{grid-template-columns:1fr;gap:15px}
+      .new-deck .flow-contact-visual.has-call-notification{grid-template-columns:1fr}
+      .new-deck .flow-contact-figure-pair{width:min(100%,348px);grid-template-columns:repeat(2,minmax(0,1fr));margin:0 auto}
+      .new-deck .flow-submit-module .flow-pair-figure{width:min(170px,calc((100vw - 112px)/2));max-width:100%;margin:0 auto}
+    }
+    @media(max-width:800px){
+      .new-deck .brand-education .article-copy{height:auto!important;min-height:118px!important;flex-basis:auto!important}
+      .new-deck>section.cover-slide .cover-credit{left:24px!important;right:24px!important;bottom:54px!important}
+    }
+    @media(max-width:1100px){
+      .new-deck .flow-contact-gallery{grid-template-columns:1fr}
+      .new-deck>section.deck-slide:not(.cover-slide),
+      .new-deck>.naming-segment{width:calc(100vw - 24px)!important;padding:32px 24px 38px!important;margin-bottom:28px!important}
+      .new-deck>section#overview{height:auto!important;min-height:0!important;max-height:none!important}
+      .new-deck #overview .overview-card{min-height:0}
+      .new-deck .slide-head h2,
+      .new-deck .naming-title{font-size:30px!important}
+      .new-deck .overview-track,
+      .new-deck .entry-grid,
+      .new-deck .media-grid,
+      .new-deck .offline-grid,
+      .new-deck .flow-list,
+      .new-deck .promo-notes{grid-template-columns:1fr!important}
+      .new-deck .promo-heading{display:block!important}
+      .new-deck .promo-heading span{display:block!important;margin-top:8px!important}
+      .new-deck .brand-education .media-grid{grid-template-columns:1fr!important}
+      .new-deck .brand-education .article-card{grid-template-columns:1fr!important}
+      .new-deck .brand-education .article-figure img{height:auto!important;max-height:520px!important;object-fit:contain!important}
+    }
+    /* 2026-09-23 跨设备复核：保留原有视觉，消除窄屏挤压与固定高度裁切。 */
+    html{-webkit-text-size-adjust:100%}
+    .new-deck>section.cover-slide .lead{white-space:normal!important}
+    .new-deck .promo-section .promo-evidence-stack .persona-card,
+    .new-deck .promo-section .promo-evidence-stack .test-card{height:auto!important}
+    .new-deck .brand-education .article-copy,
+    .new-deck .brand-education .video-demo-copy{
+      height:auto!important;min-height:var(--media-copy-height,118px)!important;flex:0 0 auto!important;
+    }
+    .new-deck .brand-education .article-figure img{object-fit:contain!important;object-position:center!important}
+    .new-deck .brand-education .article-figure a,
+    .new-deck .brand-education .video-figure a{padding:12px!important}
+    .new-deck .brand-education .article-figure,
+    .new-deck .brand-education .video-figure{border-top:1px solid #dbe3ee!important}
+    .new-deck .brand-education .video-frame{flex-direction:column!important;gap:12px}
+    .new-deck .entry-stack-head{min-height:var(--entry-head-height,0px)}
+    .video-fallback{margin:0;color:#526176;font-size:12px;text-align:center}
+    .video-fallback a{text-decoration:underline;text-underline-offset:3px}
+    .top .nav{min-width:0}
+    .top .nav a{display:flex;align-items:center;min-height:44px}
+    a:focus-visible,[tabindex]:focus-visible,video:focus-visible{outline:3px solid #00857c;outline-offset:4px}
+    .new-deck .section-kicker,.new-deck .promo-note-label,
+    .new-deck .brand-education .article-copy label,
+    .new-deck .brand-education .video-demo-copy label,
+    .new-deck .entry-stack-head small,.new-deck .flow-module-label,
+    .new-deck .flow-contact-copy small,
+    .new-deck #overview .overview-field{color:#007f76!important}
+    @media(min-width:901px) and (max-width:1199px){
+      .new-deck .promo-section .persona-viz{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+    }
+    @media(max-width:900px){
+      .new-deck{padding:24px 12px 48px!important}
+      .new-deck>section.deck-slide,.new-deck>.naming-segment{width:100%!important;max-width:100%!important}
+      .new-deck>section.cover-slide{height:auto!important;min-height:480px!important;padding:44px 24px 100px!important}
+      .new-deck>section.cover-slide .cover-credit{left:24px!important;right:24px!important;bottom:38px!important}
+      .new-deck .promo-section .promo-notes{grid-template-columns:minmax(0,1fr)!important}
+      .new-deck .promo-section .persona-viz{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+      .new-deck .promo-section .visual-conclusion{min-height:0!important}
+      .new-deck .promo-section .visual-systems{margin-top:0!important}
+      .new-deck .brand-education .article-copy,
+      .new-deck .brand-education .video-demo-copy{min-height:0!important}
+      .new-deck .brand-education .video-figure img{height:auto!important;max-height:520px!important;object-fit:contain!important}
+      .new-deck .brand-education .article-figure,
+      .new-deck .brand-education .video-figure{min-height:0!important}
+      .new-deck .brand-education .video-frame{min-height:240px!important}
+      section,[id]{scroll-margin-top:108px}
+    }
+    @media(max-width:600px){
+      .new-deck .promo-section .persona-viz{grid-template-columns:minmax(0,1fr)!important}
+      .new-deck .name-inference,.new-deck .slide-bottom,.new-deck .evidence-strip{display:block!important}
+      .new-deck .name-inference strong,.new-deck .slide-bottom strong,.new-deck .evidence-strip strong{display:block;margin-bottom:7px;white-space:normal!important}
+      .new-deck .naming-recommendation .rename-line{display:grid;grid-template-columns:auto minmax(0,1fr);gap:6px 12px}
+      .new-deck .naming-recommendation .rename-line>b{white-space:nowrap}
+      .new-deck .naming-recommendation .rename-line>strong{grid-column:1/-1;line-height:1.6}
+      .new-deck .promo-section .evidence-group-head{display:block!important}
+      .new-deck .promo-section .evidence-group-head span{display:block;margin-top:6px}
+      .new-deck .promo-section .visual-systems{grid-template-columns:minmax(0,1fr)!important}
+      .new-deck .promo-section .visual-systems>i{transform:rotate(90deg)}
+    }
+    @media(max-width:360px){
+      .new-deck>section.deck-slide:not(.cover-slide),.new-deck>.naming-segment{padding:28px 18px 32px!important}
+      .new-deck .entry-stack-head{padding:20px 18px}
+      .new-deck .flow-id-evidence-card{padding:18px 16px}
+    }
+    .new-deck .promo-cognition-steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;list-style:none;margin:0 0 28px;padding:20px 0;border-radius:12px;background:#f5f7fa}
+    .new-deck .promo-cognition-steps li{min-width:0;margin:0;padding:0 18px;border-left:1px solid #dbe3ee}
+    .new-deck .promo-cognition-steps li:first-child{border-left:0}
+    .new-deck .promo-cognition-steps .cognition-step-no{display:block;margin-bottom:9px;color:#a65116;font-size:20px;font-weight:750;line-height:1.2;font-variant-numeric:tabular-nums}
+    .new-deck .promo-cognition-steps h3{margin:0 0 8px;color:#162033;font-size:16px;line-height:1.5;font-weight:700}
+    .new-deck .promo-cognition-steps p{margin:0;color:#526176;font-size:14px;line-height:1.7}
+    @media(max-width:800px){.new-deck .promo-cognition-steps{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:22px}.new-deck .promo-cognition-steps li:nth-child(3){border-left:0}}
+    @media(max-width:600px){.new-deck .promo-cognition-steps{grid-template-columns:1fr;padding:18px;gap:16px}.new-deck .promo-cognition-steps li{padding:16px 0 0;border-left:0;border-top:1px solid #dbe3ee}.new-deck .promo-cognition-steps li:first-child{padding-top:0;border-top:0}}
+    @media(max-width:600px){.new-deck .promo-cognition-steps p{font-size:16px}}
+    .report-header{background:rgba(255,255,255,.97);border-bottom:1px solid #dbe3ee}
+    .report-header .wrap{max-width:1440px;padding:0 28px;gap:24px;min-height:64px}
+    .report-header .brand{flex:0 0 auto;color:#162033;font-size:13px;letter-spacing:0}
+    .report-header .nav{flex:0 1 auto;gap:4px;margin:0;padding:6px 3px;overflow-x:auto;scrollbar-width:thin;scrollbar-color:#c3d2d4 transparent}
+    .report-header .nav a{flex:none;position:relative;min-height:44px;padding:0 12px;border-radius:8px;color:#526176;font-size:14px;font-weight:600;line-height:1.4}
+    .report-header .nav a:hover{background:#f1f5f6;color:#00756c}
+    .report-header .nav a[aria-current="location"]{background:#e7f1f1;color:#00756c}
+    .report-header .nav a[aria-current="location"]:after{content:"";position:absolute;left:12px;right:12px;bottom:3px;height:2px;border-radius:2px;background:currentColor}
+    .report-header .nav a:focus-visible{outline:2px solid #00756c;outline-offset:-2px}
+    .new-deck [id]{scroll-margin-top:var(--report-anchor-offset,88px)}
+    @media(max-width:1100px){.report-header .wrap{display:block;padding:10px 20px 0}.report-header .brand{line-height:24px}.report-header .nav{width:100%;padding:4px 2px 6px;gap:2px}.report-header .nav a{min-height:48px;padding:0 12px}}
+    @media(max-width:1100px){.report-header[data-nav-overflow="true"] .brand{display:flex;justify-content:space-between;align-items:center;gap:12px}.report-header[data-nav-overflow="true"] .brand:after{content:"左右滑动";flex:none;color:#627084;font-size:11px;font-weight:400}}
+    /* Audience labels retain their wording and share accessible semantic colors. */
+    .new-deck{--audience-potential-text:#00756c;--audience-potential-bg:#e7f1f1;--audience-intent-text:#a65116;--audience-intent-bg:#fff0e2}
+    .new-deck #overview .overview-audience[data-audience="potential"]{background:var(--audience-potential-bg);color:var(--audience-potential-text)}
+    .new-deck #overview .overview-audience[data-audience="intent"]{background:var(--audience-intent-bg);color:var(--audience-intent-text)}
+    .new-deck .section-kicker[data-audience="potential"]{color:var(--audience-potential-text)!important}
+    .new-deck .section-kicker[data-audience="intent"]{color:var(--audience-intent-text)!important}
+
+    /* 意向用户路径：将入口、线上办理、内容宣导、资方承接与客服服务收束为同一套层级。 */
+    .new-deck>section.deck-slide:has(.section-kicker[data-audience="intent"]){
+      --intent-accent:#a65116;
+      --intent-accent-soft:#fff2e7;
+      --intent-line:#e6d9cf;
+    }
+    .new-deck>section.deck-slide:has(.section-kicker[data-audience="intent"]) .slide-head{
+      position:relative;
+      padding-bottom:0;
+      border-bottom:0;
+    }
+    .new-deck>section.deck-slide:has(.section-kicker[data-audience="intent"]) .slide-head .slide-no{
+      display:inline-flex!important;
+      align-items:center;
+      width:max-content;
+      margin:0 0 12px!important;
+      padding:5px 10px;
+      border:1px solid var(--intent-line);
+      border-radius:999px;
+      background:var(--intent-accent-soft);
+      color:var(--intent-accent)!important;
+      font-size:12px!important;
+      line-height:1.4!important;
+      letter-spacing:.045em;
+    }
+    .new-deck>section.deck-slide:has(.section-kicker[data-audience="intent"]) .section-kicker{
+      margin-bottom:10px!important;
+    }
+    .new-deck #entry-guidance .entry-stack{gap:14px;margin-top:24px}
+    .new-deck #entry-guidance .entry-stack-item{
+      border-color:#e1e7ef;
+      box-shadow:0 8px 24px rgba(22,32,51,.045);
+      transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease;
+    }
+    .new-deck #entry-guidance .entry-stack-item:hover{
+      transform:translateY(-2px);
+      border-color:#d7c0ae;
+      box-shadow:0 14px 30px rgba(85,56,34,.09);
+    }
+    .new-deck #entry-guidance .entry-stack-head{padding:19px 22px 17px}
+    .new-deck #entry-guidance .entry-stack-head small{
+      display:inline-flex;
+      margin-bottom:9px;
+      padding:4px 8px;
+      border-radius:999px;
+      background:#fff4eb;
+      color:#a65116!important;
+      font-size:11px;
+      letter-spacing:.03em;
+    }
+    .new-deck #entry-guidance .entry-stack-head h3{font-size:19px;letter-spacing:-.01em}
+    .new-deck #entry-guidance .entry-stack-head p{font-size:14px;line-height:1.55}
+    .new-deck #entry-guidance .entry-stack-figure{padding:12px}
+    .new-deck #cognition-flow .flow-module{border-radius:10px}
+    .new-deck #cognition-flow .flow-module-head>span{
+      display:block;
+      margin-bottom:12px;
+      padding:0;
+      border-radius:0;
+      background:transparent;
+      color:#009e92;
+      font-size:13px;
+      font-weight:700;
+      letter-spacing:.05em;
+    }
+    .new-deck #cognition-flow .flow-current,
+    .new-deck #cognition-flow .flow-issue-grid,
+    .new-deck #cognition-flow .flow-module{margin-top:24px}
+    .new-deck #content-education .media-grid{gap:16px;margin-top:24px;align-items:stretch}
+    .new-deck #content-education .media-card,
+    .new-deck #content-education .video-demo{overflow:hidden;border-radius:10px;box-shadow:0 8px 24px rgba(22,32,51,.045)}
+    .new-deck #content-education .media-card{display:flex;flex-direction:column;padding:0}
+    .new-deck #content-education .article-copy{padding:18px 20px;background:#fff}
+    .new-deck #content-education .article-copy label,
+    .new-deck #content-education .video-demo-copy label{font-size:11px;letter-spacing:.035em}
+    .new-deck #content-education .article-copy b{margin:8px 0 5px;font-size:19px}
+    .new-deck #content-education .article-copy span{font-size:13px;line-height:1.55}
+    .new-deck #content-education .article-figure,
+    .new-deck #content-education .video-figure{flex:1;background:#f3f6f9}
+    .new-deck #content-education .article-figure a,
+    .new-deck #content-education .video-figure a{display:block;overflow:hidden;background:#f3f6f9}
+    .new-deck #content-education .article-figure img,
+    .new-deck #content-education .video-figure img{transform:none}
+    .new-deck #content-education .article-figure,
+    .new-deck #content-education .video-figure{background:#f3f6f9!important}
+    .new-deck #content-education .article-figure a,
+    .new-deck #content-education .video-figure a{background:#f3f6f9!important}
+    .new-deck #content-education .article-figure img,
+    .new-deck #content-education .video-figure img{background:#f3f6f9!important;transform:none}
+    .new-deck #content-education .article-figure figcaption,
+    .new-deck #content-education .video-figure figcaption{color:#6d7b8d!important;background:#fff!important}
+    .new-deck #content-education .video-demo{align-content:start;grid-template-rows:auto 1fr;padding:0;background:#fff}
+    .new-deck #content-education .video-demo-copy{width:100%;padding:18px 20px;background:#fff4eb;text-align:left}
+    .new-deck #content-education .video-demo-copy b{margin:8px 0 4px;font-size:19px}
+    .new-deck #content-education .video-demo-copy span{font-size:13px}
+    .new-deck #content-education .video-frame{min-height:0;padding:14px;background:#f3f6f9}
+    .new-deck #offline-new .lender-flow-head{padding-top:6px}
+    .new-deck #offline-new .lender-analysis-head{margin-top:32px}
+    .new-deck #offline-new .lender-recommendation{box-shadow:0 12px 28px rgba(22,32,51,.055)}
+    .new-deck #service-scripts .service-mission{border:1px solid #d8e9e6}
+    .new-deck #service-scripts .service-standards,
+    .new-deck #service-scripts .service-speech{border-color:#e0e6ed}
+    .new-deck #service-scripts .service-standard{padding:12px 0}
+    .new-deck #service-scripts .service-governance{border-top:1px solid #e1e8eb}
+    .new-deck #service-scripts .service-source-note{display:grid;grid-template-columns:auto minmax(0,1fr);gap:5px 12px;align-items:start;margin:14px 0 10px;padding:12px 15px;border:1px solid #efd2bd;border-left:4px solid #bd5b1c;border-radius:8px;background:#fff7f0;color:#674a39}
+    .new-deck #service-scripts .service-source-note strong{grid-row:1 / span 2;align-self:start;padding:5px 8px;border-radius:5px;background:#a94e18;color:#fff;font-size:11px;line-height:1.4;white-space:nowrap}
+    .new-deck #service-scripts .service-source-note b{color:#803d14;font-size:13px;font-weight:750;line-height:1.5}
+    .new-deck #service-scripts .service-source-note p{grid-column:2;margin:0;color:#6f625b;font-size:11px;line-height:1.5}
+    .new-deck #service-scripts .service-speech blockquote{line-height:1.7}
+    .new-deck #service-scripts .service-layout{grid-template-columns:minmax(0,1fr);gap:22px}
+    .new-deck #service-scripts .service-standards{padding:20px 22px;background:#f1f7f6;border:1px solid #dce9e7;border-left:4px solid #16877e}
+    .new-deck #service-scripts .service-standards .service-column-title{font-size:21px}
+    .new-deck #service-scripts .service-examples{padding:20px 22px;background:#f0f2f5;border:1px solid #e0e4e9;border-radius:8px}
+    .new-deck #service-scripts .service-examples .service-column-title{font-size:19px;color:#344256}
+    .new-deck #service-scripts .service-examples .service-speech{background:#f9fafb;border-color:#dfe4ea}
+    .new-deck #service-scripts .service-example-intro{margin:-8px 0 14px;color:#707b89;font-size:11px;line-height:1.55}
+    @media(max-width:900px){.new-deck #service-scripts .service-layout{grid-template-columns:1fr}}
+    /* Nested recommendation section must not inherit the fixed slide sizing applied to all section elements. */
+    .new-deck #offline-new .lender-recommendation{
+      display:block!important;
+      width:100%!important;
+      height:auto!important;
+      min-height:0!important;
+      max-height:none!important;
+      margin:22px 0 0!important;
+      padding:20px 22px!important;
+      overflow:visible!important;
+      box-sizing:border-box!important;
+    }
+    @media(max-width:560px){.new-deck #service-scripts .service-source-note{grid-template-columns:1fr;gap:6px;padding:12px 13px}.new-deck #service-scripts .service-source-note strong{grid-row:auto;width:max-content}.new-deck #service-scripts .service-source-note p{grid-column:1}}
+    @media(max-width:800px){
+      .new-deck>section.deck-slide:has(.section-kicker[data-audience="intent"]) .slide-head{padding-bottom:16px}
+      .new-deck #entry-guidance .entry-stack-head{min-height:0!important}
+      .new-deck #entry-guidance .entry-stack-figure{padding:9px}
+      .new-deck #content-education .media-grid{gap:14px}
+      .new-deck #content-education .media-card{display:grid}
+      .new-deck #content-education .article-copy{padding:16px 18px}
+      .new-deck #content-education .video-demo{grid-template-rows:auto auto}
+      .new-deck #content-education .video-frame{padding:12px}
+    }
+    /* 意向用户链路统一视觉：暖橙标记阶段，深蓝灰承载内容，浅中性色承载信息。 */
+    .new-deck #entry-guidance,
+    .new-deck #cognition-flow,
+    .new-deck #content-education,
+    .new-deck #offline-new,
+    .new-deck #service-scripts,
+    .new-deck>.promo-solution-card{
+      --intent-accent:#a65116;
+      --intent-accent-soft:#fff3e8;
+      --intent-border:#e2e6eb;
+      --intent-surface:#f5f6f8;
+    }
+    .new-deck #entry-guidance .section-kicker,
+    .new-deck #cognition-flow .section-kicker,
+    .new-deck #content-education .section-kicker,
+    .new-deck #offline-new .section-kicker,
+    .new-deck #service-scripts .section-kicker,
+    .new-deck>.promo-solution-card .section-kicker{
+      display:block!important;
+      width:auto;
+      margin:0 0 14px!important;
+      padding:0;
+      border:0;
+      border-radius:0;
+      background:transparent;
+      color:var(--intent-accent)!important;
+      font-size:15px!important;
+      font-weight:760;
+      line-height:1.3;
+      letter-spacing:.055em;
+    }
+    .new-deck #entry-guidance .slide-head,
+    .new-deck #cognition-flow .slide-head,
+    .new-deck #content-education .slide-head,
+    .new-deck #offline-new .slide-head,
+    .new-deck #service-scripts .slide-head,
+    .new-deck>.promo-solution-card .promo-solution-title{
+      max-width:980px;
+      margin-bottom:22px!important;
+      padding-bottom:0!important;
+      border:0!important;
+    }
+    .new-deck #entry-guidance .slide-head h2,
+    .new-deck #cognition-flow .slide-head h2,
+    .new-deck #content-education .slide-head h2,
+    .new-deck #offline-new .slide-head h2,
+    .new-deck #service-scripts .slide-head h2,
+    .new-deck>.promo-solution-card .promo-solution-title h2{
+      margin:0 0 8px!important;
+      color:#172236;
+      font-size:29px!important;
+      line-height:1.32!important;
+      letter-spacing:-.018em;
+    }
+    .new-deck #entry-guidance .slide-head>p,
+    .new-deck #cognition-flow .slide-head>p,
+    .new-deck #content-education .slide-head>p,
+    .new-deck #offline-new .slide-head>p,
+    .new-deck #service-scripts .slide-head>p,
+    .new-deck>.promo-solution-card .promo-solution-title>p{
+      max-width:900px;
+      margin:0!important;
+      color:#657184;
+      font-size:14px;
+      line-height:1.65;
+    }
+    .new-deck #entry-guidance .entry-stack{gap:18px;margin-top:22px}
+    .new-deck #entry-guidance .entry-stack-item,
+    .new-deck #content-education .media-card,
+    .new-deck #content-education .video-demo,
+    .new-deck #offline-new .lender-pair,
+    .new-deck #service-scripts .service-standards,
+    .new-deck #service-scripts .service-examples{
+      border-color:var(--intent-border)!important;
+      border-radius:10px!important;
+      box-shadow:0 5px 16px rgba(23,34,54,.045)!important;
+    }
+    .new-deck #entry-guidance .entry-stack-head{border-bottom-color:var(--intent-border);background:#fff}
+    .new-deck #entry-guidance .entry-stack-head small,
+    .new-deck #content-education .article-copy label,
+    .new-deck #content-education .video-demo-copy label{color:var(--intent-accent)!important}
+    .new-deck #entry-guidance .entry-stack-figure{background:#152b3a}
+    .new-deck #entry-guidance .entry-stack-figure img{border-radius:6px}
+
+    .new-deck #cognition-flow .flow-current-label,
+    .new-deck #cognition-flow .flow-module-head>span{color:var(--intent-accent)!important}
+    .new-deck #cognition-flow .flow-current,
+    .new-deck #cognition-flow .flow-current a,
+    .new-deck #cognition-flow .flow-current figcaption{background:#f1f3f5;color:#667386}
+    .new-deck #cognition-flow .flow-current,
+    .new-deck #cognition-flow .flow-issues,
+    .new-deck #cognition-flow .flow-module{border-color:var(--intent-border)}
+    .new-deck #cognition-flow .flow-issues{background:#f7f8fa}
+    .new-deck #cognition-flow .flow-issue-grid article{border-left-color:#cf9a72}
+    .new-deck #cognition-flow .flow-module-notes{background:#f5f6f8}
+
+    .new-deck #content-education .media-grid{grid-template-columns:1fr 1fr .82fr!important;gap:18px!important;margin-top:22px!important;align-items:stretch!important}
+    .new-deck #content-education .media-card{min-height:330px!important;background:#fff!important}
+    .new-deck #content-education .article-copy{height:auto!important;min-height:118px!important;flex:0 0 auto!important}
+    .new-deck #content-education .article-figure,
+    .new-deck #content-education .video-figure,
+    .new-deck #content-education .article-figure a,
+    .new-deck #content-education .video-figure a,
+    .new-deck #content-education .article-figure img,
+    .new-deck #content-education .video-figure img{background:#152b3a!important}
+    .new-deck #content-education .article-figure,
+    .new-deck #content-education .video-figure{border-top:1px solid var(--intent-border)!important}
+    .new-deck #content-education .article-figure figcaption,
+    .new-deck #content-education .video-figure figcaption{background:#152b3a!important;color:#c3d0dc!important}
+    .new-deck #content-education .video-demo{
+      display:flex!important;
+      flex-direction:column!important;
+      grid-column:auto!important;
+      min-height:330px!important;
+      background:#fff!important;
+    }
+    .new-deck #content-education .video-demo-copy{
+      display:block!important;
+      height:118px!important;
+      min-height:118px!important;
+      flex:0 0 118px!important;
+      padding:18px 20px!important;
+      background:#fff8f2!important;
+    }
+    .new-deck #content-education .video-frame{
+      flex:1 1 auto!important;
+      min-height:289px!important;
+      border-top:1px solid var(--intent-border)!important;
+      border-left:0!important;
+      background:#f1f3f5!important;
+    }
+    .new-deck #content-education .video-demo video{background:#f1f3f5!important}
+
+    .new-deck #offline-new .lender-scope,
+    .new-deck #offline-new .lender-pair-number{background:#f3f5f7}
+    .new-deck #offline-new .lender-pair-solution{border-color:#ead8c9;background:#fff8f2}
+    .new-deck #offline-new .lender-pair-solution small,
+    .new-deck #offline-new .lender-recommendation-step small{color:var(--intent-accent)}
+    .new-deck #offline-new .lender-recommendation{border-color:#eed8c8;background:#fff9f4}
+    .new-deck #offline-new .lender-case{margin-top:24px;padding:18px 20px;border:1px solid #e1e6ec;border-radius:9px;background:#f7f8fa}
+    .new-deck #offline-new .lender-case .lender-flow-head{margin-top:0;padding-top:0;gap:12px}
+    .new-deck #offline-new .lender-case-label{display:block;margin-bottom:6px;color:#627084;font-size:11px;font-weight:800;letter-spacing:.05em}
+    .new-deck #offline-new .lender-case .lender-scope{margin-top:8px;padding:0;background:transparent;font-size:12px}
+    .new-deck #offline-new .lender-case .lender-flow-figure{margin-top:12px}
+    .new-deck #offline-new .lender-case .lender-analysis-head{margin:16px 0 9px}
+    .new-deck #offline-new .lender-case .lender-analysis-head h4{margin:0;color:#344256;font-size:16px;line-height:1.4}
+    .new-deck #offline-new .lender-case .lender-analysis-head span{font-size:12px}
+    .new-deck #offline-new .lender-recommendation-label::before{content:none}
+    @media(max-width:680px){.new-deck #offline-new .lender-case{padding:14px}}
+    .new-deck #offline-new .lender-recommendation-label{background:var(--intent-accent);border-color:var(--intent-accent);box-shadow:none}
+    .new-deck #offline-new .lender-recommendation-step{border-color:#eadfd6;background:#fff}
+
+    .new-deck #service-scripts .service-mission{border:0!important;border-bottom:1px solid #e1e8eb!important;background:transparent!important}
+    .new-deck #service-scripts .service-examples{background:#f1f3f5!important}
+    .new-deck #service-scripts .service-standards{background:#f2f7f6!important}
+    .new-deck #service-scripts .service-standards .service-column-title,
+    .new-deck #service-scripts .service-examples .service-column-title{font-size:20px!important}
+    @media(max-width:1100px){
+      .new-deck #content-education .media-grid{grid-template-columns:1fr!important}
+      .new-deck #content-education .video-demo{grid-column:auto;min-height:330px!important}
+      .new-deck #content-education .video-demo-copy{height:118px!important;min-height:118px!important;flex:0 0 118px!important}
+      .new-deck #content-education .video-frame{border-left:0!important;border-top:1px solid var(--intent-border)!important}
+    }
+    /* 身份证页注释：压缩说明行高，并让左侧说明与右侧方案图在桌面端等高对齐。 */
+    .new-deck #cognition-flow .flow-id-layout{
+      grid-template-columns:minmax(0,1fr) minmax(320px,.52fr);
+      gap:18px;
+      align-items:stretch;
+    }
+    .new-deck #cognition-flow .flow-id-evidence-list{justify-content:flex-start;gap:9px;min-height:0}
+    .new-deck #cognition-flow .flow-id-evidence-card{flex:1 1 0;align-items:center;padding:11px 13px}
+    .new-deck #cognition-flow .flow-id-evidence-copy h4{margin-bottom:8px;font-size:14px;line-height:1.3}
+    .new-deck #cognition-flow .flow-id-evidence-pair{
+      display:grid;
+      grid-template-columns:62px minmax(0,1fr);
+      gap:6px;
+      padding:0;
+      line-height:1.4;
+    }
+    .new-deck #cognition-flow .flow-id-evidence-pair+.flow-id-evidence-pair{margin-top:6px;padding-top:0}
+    .new-deck #cognition-flow .flow-id-evidence-pair strong{padding:0;font-size:10px;line-height:1.4}
+    .new-deck #cognition-flow .flow-id-evidence-pair p{font-size:12px;line-height:1.4}
+    .new-deck #cognition-flow .flow-id-full-figure{
+      display:flex;
+      flex-direction:column;
+      align-self:stretch;
+      max-width:none;
+      min-height:0;
+      margin:0;
+    }
+    .new-deck #cognition-flow .flow-id-full-figure a{display:flex;flex:1;align-items:center;justify-content:center;min-height:0}
+    .new-deck #cognition-flow .flow-id-full-figure img{width:100%;height:100%;min-height:0;object-fit:contain}
+    .new-deck #cognition-flow .flow-id-full-figure figcaption{flex:none;padding:7px 10px;font-size:11px;line-height:1.4}
+    @media(max-width:960px){
+      .new-deck #cognition-flow .flow-id-layout{grid-template-columns:1fr;align-items:start}
+      .new-deck #cognition-flow .flow-id-evidence-card{flex:none;padding:10px 12px}
+      .new-deck #cognition-flow .flow-id-full-figure{display:block;width:min(100%,380px);max-width:380px;margin:0 auto}
+      .new-deck #cognition-flow .flow-id-full-figure a{display:block}
+      .new-deck #cognition-flow .flow-id-full-figure img{height:auto;min-height:0}
+    }
+    @media(prefers-reduced-motion:reduce){
+      .new-deck #entry-guidance .entry-stack-item{transition:none}
+      .new-deck #entry-guidance .entry-stack-item:hover{transform:none}
+    }
+    .new-deck>section.deck-slide.closing-slide{
+      position:relative;
+      display:flex!important;
+      flex-direction:column;
+      justify-content:center;
+      min-height:clamp(420px,46vw,610px)!important;
+      padding:clamp(36px,6vw,76px)!important;
+      overflow:hidden!important;
+      isolation:isolate;
+      color:#162033;
+      background:var(--bookend-background)!important;
+      border:1px solid rgba(219,227,238,.9)!important;
+      box-shadow:var(--shadow)!important;
+    }
+    .new-deck>section.deck-slide:is(.cover-slide,.closing-slide){overflow:hidden!important}
+    .new-deck>section.deck-slide:is(.cover-slide,.closing-slide)::before,
+    .new-deck>section.deck-slide:is(.cover-slide,.closing-slide)::after{content:"";position:absolute;z-index:-1;pointer-events:none;border:1px solid rgba(0,169,157,.1);border-radius:50%}
+    .new-deck>section.deck-slide:is(.cover-slide,.closing-slide)::before{width:520px;height:520px;right:-130px;top:-230px;box-shadow:0 0 0 54px rgba(0,169,157,.025),0 0 0 108px rgba(0,169,157,.02)}
+    .new-deck>section.deck-slide:is(.cover-slide,.closing-slide)::after{width:320px;height:320px;right:90px;bottom:-245px}
+    .closing-content{position:relative;width:100%;margin:auto 0}
+    .closing-thanks{padding:0 0 30px;text-align:left}
+    .closing-thanks h2{margin:0;color:#162033;font-size:clamp(72px,10vw,132px);font-weight:800;line-height:.98;letter-spacing:-.065em}
+    .closing-thanks p{margin:12px 0 0;color:#526176;font-size:clamp(17px,2vw,22px);font-weight:650;letter-spacing:.08em}
+    .closing-signoff{display:flex;justify-content:flex-start;gap:20px;margin-top:22px;color:#627084;font-size:13px;letter-spacing:.04em}
+    .closing-todos{max-width:900px;margin:30px 0 0}
+    .closing-todos h3{margin:0 0 12px;color:#007f76;font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
+    .closing-actions{margin:0;padding:0;list-style:none;counter-reset:closing-action}
+    .closing-actions li{display:grid;grid-template-columns:48px minmax(0,1fr);gap:12px;align-items:start;padding:13px 0;counter-increment:closing-action}
+    .closing-actions li::before{content:"0" counter(closing-action);display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:#e5f3f1;color:#008f84;font-size:12px;font-weight:800}
+    .closing-actions b{display:block;margin:1px 0 4px;color:#263348;font-size:15px;line-height:1.45}
+    .closing-actions span{display:block;color:#627084;font-size:12px;line-height:1.55}
+    .closing-foot{margin:18px 0 0;color:#718096;font-size:11px;line-height:1.5;text-align:left}
+    @media(max-width:700px){
+      .new-deck>section.deck-slide.closing-slide{min-height:0!important;padding:38px 28px!important}
+      .closing-thanks{padding-bottom:24px}
+      .closing-signoff{flex-wrap:wrap;gap:8px 16px;margin-top:17px}
+      .closing-todos{margin-top:24px}
+      .closing-actions li{grid-template-columns:40px minmax(0,1fr);gap:9px;padding:12px 0}
+      .closing-actions b{font-size:14px}
+    }
+    @media(max-width:420px){.closing-thanks h2{font-size:clamp(64px,18vw,82px)}}
+  </style>
+</head>
+<body>
+  <header class="top report-header"><div class="wrap"><div class="brand">车抵贷用户认知提升设计思路</div><nav class="nav" aria-label="报告章节导航"><a href="#overview">方案总览</a><a href="#product-naming">产品命名</a><a href="#visual-direction">视觉方向</a><a href="#promo-guide">宣导页</a><a href="#entry-guidance">入口引导</a><a href="#cognition-flow">认知节点</a><a href="#content-education">传播宣导</a><a href="#offline-new">资方流程</a><a href="#service-scripts">客服话术</a><a href="#closing-page">结束页</a></nav></div></header>
+  <main class="new-deck">
+    <section class="deck-slide cover-slide"><div class="slide-copy"><span class="eyebrow">用户认知 / 设计提案</span><h1>车抵贷用户<br>认知提升设计思路1.0</h1><p class="lead">从产品触达到线上申请、电话联系与资方办理，基于全流程的视角探索车抵贷用户的心智建设</p></div><div class="cover-credit">@信贷设计团队</div></section>
+    <section id="overview" class="deck-slide"><div class="slide-head"><span class="slide-no">01 / 总览</span><h2>用户认知建设方案总览</h2><p class="overview-subtitle"><span>面向潜在用户，在滴滴产品场景中建立对车抵贷的通用认知；</span><span>面向车抵贷用户，贯穿线上申请、电话承接与线下办理开展产品内教育。</span></p></div><div class="overview-track">
+      <div class="overview-card blue-card"><span class="overview-audience" data-audience="potential">潜在用户</span><b>基础认知</b><div class="overview-detail"><span class="overview-field">位置</span><p>出行APP / 钱包 / 公众号 / 视频号</p></div><div class="overview-detail"><span class="overview-field">要做什么</span><p>说明车抵贷是什么、有什么特点，以及车辆车本抵押与否、使用情况和基本办理方式。</p></div></div>
+      <div class="overview-card teal-card"><span class="overview-audience" data-audience="intent">意向用户</span><b>线上申请</b><div class="overview-detail"><span class="overview-field">位置</span><p>产品入口 / 宣导页 / 身份证页 / 协议页 / 提交页</p></div><div class="overview-detail"><span class="overview-field">要做什么</span><p>解释每一步要做什么、资料交给谁，以及提交后会发生什么。</p></div></div>
+      <div class="overview-card amber-card"><span class="overview-audience" data-audience="intent">意向用户</span><b>电话联系</b><div class="overview-detail"><span class="overview-field">位置</span><p>提交成功页 / 来电预告 / 接听界面</p></div><div class="overview-detail"><span class="overview-field">要做什么</span><p>提前告知联系方与沟通目的，提供来电身份的核验线索。</p></div></div>
+      <div class="overview-card coral-card"><span class="overview-audience" data-audience="intent">意向用户</span><b>线下办理</b><div class="overview-detail"><span class="overview-field">位置</span><p>短信 / 企微客服 / 资方个性化提交页</p></div><div class="overview-detail"><span class="overview-field">要做什么</span><p>讲清材料要求、当前进度、放款额度、放款进度、还款方式。</p></div></div>
+    </div></section>
+    <div id="product-naming" class="naming-segment" aria-label="名称建议"><span class="section-kicker" data-audience="potential">潜在用户｜基础认知</span><h2 class="naming-title">产品名称要减少复杂联想，降低第一眼的顾虑</h2><div class="promo-naming"><div class="naming-evidence-panel"><div class="research-view"><span class="research-view-label">调研的用户视角</span><div class="name-evidence"><article><b>“抵押”激活了对复杂繁重流程联想</b><p>缺少实际办理经验的用户容易联想到交车、装 GPS、线下验车和大量材料；这些印象会在了解真实流程之前放大顾虑。</p></article><article><b>想先看看，却担心进入申请</b><p>一些用户只想了解车辆价值和可贷空间，但会把填车牌、点“评估额度”理解为正式申请，并担心随后的审核与电话联系。</p></article></div></div><span class="naming-panel-divider" aria-hidden="true"></span><div class="competitor-naming"><h3>主要相关竞品名称</h3><div class="competitor-grid"><div class="competitor-type"><span>支付宝 · 蚂蚁星河</span><b><a href="https://epaper.cs.com.cn/zgzqb/images/2026-03/19/A04/zqDB0419.pdf" target="_blank" rel="noopener">星选车贷</a></b></div><div class="competitor-type"><span>高德地图</span><b>车主借钱（产品内车抵贷）</b></div><div class="competitor-type"><span>华为钱包 · 易鑫</span><b><a href="https://consumer.huawei.com/cn/support/content/zh-cn15962291/" target="_blank" rel="noopener">车主贷</a></b></div><div class="competitor-type"><span>度小满</span><b>有钱花</b></div><div class="competitor-type"><span>携程金融</span><b>借去花</b></div><div class="competitor-type"><span>中国平安</span><b><a href="https://www.pingan.com/official/loan/nocarloan" target="_blank" rel="noopener">车主贷</a></b></div><div class="competitor-type"><span>神州优车</span><b><a href="https://www.ucarinc.com/layout/financial/" target="_blank" rel="noopener">神州闪贷—车主贷</a></b></div><div class="competitor-type"><span>随星借 · 天星数科</span><b><a href="https://finance.eastmoney.com/a/202606103766526527.html" target="_blank" rel="noopener">车主用钱</a></b></div></div></div></div><div class="naming-recommendation"><span class="promo-note-label">改名建议 / 待验证</span><div class="rename-line"><b>车抵贷</b><i>→</i><strong>车贷　/　车主贷　/　车主用钱</strong></div><div class="name-inference"><strong>命名验证维度</strong><span>同时比较用户理解度、是否误解为其他贷款类型、申请意愿与滴滴品牌适配度，不以降低顾虑作为唯一判断标准。</span></div></div></div></div>
+    <section id="visual-direction" class="deck-slide promo-section"><div class="slide-head"><span class="section-kicker" data-audience="potential">潜在用户｜基础认知</span><span class="slide-no">02-01 / 宣导页</span><h2>视觉方向探索匹配下沉用户偏好，延续历史实验结论</h2></div><div class="promo-notes"><div class="persona-card"><div class="persona-title"><h3>车抵贷用户画像</h3><span>现有用户特征</span></div><div class="persona-viz"><div class="persona-metric"><small>性别</small><strong>男性占比极高</strong><div class="gender-viz" aria-label="男性占比94%"><div class="gender-ring"><span>94%</span></div><div class="gender-viz-copy"><b>男性</b><small>占比极高</small></div></div></div><div class="persona-metric"><small>年龄</small><strong>26–45 岁</strong><div class="age-viz" aria-label="26至45岁年龄区间"><div class="age-track"><i></i></div><div class="age-scale"><span>20</span><span>26</span><span>35</span><span>45</span><span>50+</span></div><em>核心年龄段</em></div></div><div class="persona-metric"><small>税前月收入</small><strong>6,000–12,000 元</strong><div class="persona-range income"><i></i></div><div class="persona-scale"><span>3k</span><span>6k</span><span>12k</span><span>18k+</span></div></div><div class="persona-metric"><small>主要职业类型</small><strong>经营与灵活就业人群</strong><div class="persona-jobs"><span>个体经营者</span><span>自由职业者</span></div></div></div><p class="persona-note">画像提示：表达应直接、易理解，突出办理方式、车辆使用、费用与时间预期。</p></div><div class="test-card"><div class="test-card-head"><h3>入口卡片测试</h3><span>不同额度与表达方式的方案对照</span></div><figure class="test-figure"><a href="assets/entry-card-test.png" target="_blank" rel="noopener" aria-label="查看入口卡片测试原图"><img src="assets/entry-card-test.png" alt="车抵贷入口卡片的多版本测试方案与数据结果截图" loading="lazy" width="2616" height="616"></a><figcaption>测试方案与结果示意｜窄屏可左右滑动，点击查看原图。截图中的具体指标以测试数据源为准。</figcaption></figure></div><div class="visual-direction"><span class="promo-note-label">视觉取向</span><h3>橙黄色视觉体系替换绿色体系</h3><p>可采用配图中的橙黄色产品视觉体系，替换原线上绿色表达；用于降低金融感和压迫感，并与“评估额度”等关键行动形成一致的视觉识别。最终色彩仍需以品牌规范核对。</p></div></div><div id="promo-guide" class="promo-solution"><div class="promo-solution-title"><h2>宣导页方案改造</h2><p>先用用户画像与入口实验明确表达对象，再通过宣导页内容讲清车辆使用、办理流程与服务方式。</p></div><ol class="promo-cognition-steps" aria-label="认知提升思路"><li><span class="cognition-step-no" aria-hidden="true">01</span><h3>讲清产品特点</h3><p>图文说明车抵贷是什么、车能否继续用、如何申请。</p></li><li><span class="cognition-step-no" aria-hidden="true">02</span><h3>短视频讲流程</h3><p>1分钟快速说明办理流程与服务方式。</p></li><li><span class="cognition-step-no" aria-hidden="true">03</span><h3>问答解顾虑</h3><p>回答资料用途、信息安全、费用及用车问题。</p></li><li><span class="cognition-step-no" aria-hidden="true">04</span><h3>说明下一步</h3><p>讲清谁会联系、何时联系、接下来做什么。</p></li></ol><div class="promo-heading"><b>附图示意</b><span>在测额入口中增加视频、问答和图文说明，介绍车辆使用、办理流程与服务方式。</span></div><figure class="promo-figure"><a href="assets/online-promo-solution-v2.png" target="_blank" rel="noopener" aria-label="查看宣导页方案配图原图"><img src="assets/online-promo-preview.png" alt="宣导页方案示意：包含视频介绍入口、车贷视频内容、问题答疑界面和文字介绍页面" loading="lazy" width="4864" height="2940"></a><figcaption>画面用于展示内容方向，具体页面文案和业务信息仍需核对；窄屏可左右滑动，点击查看原图。</figcaption></figure></div></section>
+    <section id="entry-guidance" class="deck-slide entry-comparison">
+      <div class="slide-head"><span class="section-kicker" data-audience="intent">意向用户｜场景化引导教育</span><h2>不同入口场景的人群差异化引导</h2><p>先在高频场景中建立轻量入口，再让有意向的用户获得更明确的产品解释。</p></div>
+      <div class="entry-stack">
+        <article class="entry-stack-item"><div class="entry-stack-head"><small>01 / 滴滴 App 卡片区域</small><h3>轻量化测一测</h3><p>用「爱车值多少钱」引发了解意愿；引导用户填写基础信息，先沉淀初步需求线索，便于后续跟进承接。</p></div><figure class="entry-stack-figure"><a href="assets/app-home-card-promo-v2.png" target="_blank" rel="noopener" aria-label="查看滴滴 App 卡片区域方案原图"><img src="assets/app-home-card-promo-v2.png" alt="滴滴 App 中爱车值多少钱卡片进入车主信息页的方案对照" loading="lazy" width="1821" height="1813"></a></figure></article>
+<article class="entry-stack-item"><div class="entry-stack-head"><small>02 / 钱包</small><h3>突出车主贷入口</h3><p>先展示「不押车」提示和 20 秒视频；看完后，卡片收进「车抵贷」金刚位，并以动效提示入口。</p></div><figure class="entry-stack-figure"><a href="assets/wallet-entry-promo.png" target="_blank" rel="noopener" aria-label="查看滴滴钱包入口方案原图"><img src="assets/wallet-entry-promo.png" alt="滴滴钱包先展示车主贷视频，之后收起到车抵贷金刚位的方案示意" loading="lazy" width="1892" height="1777"></a></figure></article>
+        <article class="entry-stack-item"><div class="entry-stack-head"><small>03 / 智选平台场景</small><h3>智选列表页的强展示</h3><p>突出车抵贷入口与「严选机构」，卡片集中展示放款速度、押证不押车及放款节奏。</p></div><figure class="entry-stack-figure"><a href="assets/selected-platform-entry.png" target="_blank" rel="noopener" aria-label="查看智选平台入口方案原图"><img src="assets/selected-platform-entry.png" alt="智选平台绿色车抵贷入口与橙色车主贷测额页面的对照方案" loading="lazy" width="2047" height="1857"></a></figure></article>
+        <article class="entry-stack-item"><div class="entry-stack-head"><small>04 / 现金贷用户导流场景</small><h3>现金贷B1页先答疑再评估</h3><p>入口加入短视频，快速讲清车抵贷特点、资料安全与服务方式，帮助用户了解后再评估。</p></div><figure class="entry-stack-figure"><a href="assets/cash-loan-referral-v2.png" target="_blank" rel="noopener" aria-label="查看现金贷用户导流场景方案原图"><img src="assets/cash-loan-referral-v2.png" alt="现金贷评估页面加入车主贷短视频答疑入口，点击后展示借款产品介绍页面" loading="lazy" width="1869" height="1989"></a></figure></article>
+      </div>
+    </section>
+    <section id="cognition-flow" class="deck-slide flow-overview">
+      <div class="slide-head"><span class="section-kicker" data-audience="intent">意向用户｜场景化引导教育</span><h2>用户链路认知节点方案</h2><p>当前线上路径依次经过实名认证、身份证上传、协议确认和申请提交；以下按这些节点梳理用户可能遇到的理解问题。</p></div>
+      <span class="flow-current-label">01 / 当前线上现状</span>
+      <figure class="flow-current"><a href="assets/online-application-flow-current-v2.png" target="_blank" rel="noopener" aria-label="查看线上申请主要流程原图"><img src="assets/online-application-flow-current-v2.png" alt="线上申请主要流程：宣导首页、实名页、身份证页、协议页、提交页五个页面" loading="lazy" width="5207" height="2180"></a><figcaption>当前线上申请主要流程｜窄屏可左右滑动，点击查看原图</figcaption></figure>
+      <div class="flow-issues"><strong>现状观察</strong><div class="flow-issue-grid"><article><b>实名认证</b><p>页面直接要求姓名与身份证号，信息用途及后续步骤缺少就近解释。</p></article><article><b>身份证上传</b><p>合作机构与核验用途已有提示，但字号较小，不易快速确认资料会交给谁。</p></article><article><b>协议确认</b><p>授权正文较长，信息接收方、使用范围和关键条款不易扫读。</p></article><article><b>申请提交</b><p>页面预告顾问联系与等待时间，来电身份和核验方式仍需讲清。</p></article></div></div>
+      <div class="flow-module flow-id-module">
+        <div class="flow-module-head"><span>02 / 重点环节-身份证上传</span><h3>身份证上传环节迭代</h3></div>
+        <div class="flow-id-layout">
+          <div class="flow-id-evidence-list" aria-label="身份证上传顾虑与设计方案">
+            <article class="flow-id-evidence-card"><div class="flow-id-evidence-copy"><h4>第三方接收，资料流向不明</h4><div class="flow-id-evidence-pair"><strong>用户顾虑</strong><p>不清楚资料交给谁、如何使用。</p></div><div class="flow-id-evidence-pair"><strong>设计方案</strong><p>上传前说明滴滴服务承诺、持牌机构身份、资料用途与信息保护。</p></div></div></article>
+            <article class="flow-id-evidence-card"><div class="flow-id-evidence-copy"><h4>限定用途，留下可见依据</h4><div class="flow-id-evidence-pair"><strong>用户顾虑</strong><p>担心证件被重复使用，无法确认用途。</p></div><div class="flow-id-evidence-pair"><strong>设计方案</strong><p>证件加注“仅限本次使用”水印，协议明确授权对象与用途。</p></div></div></article>
+            <article class="flow-id-evidence-card"><div class="flow-id-evidence-copy"><h4>证件从哪里找，怎么上传</h4><div class="flow-id-evidence-pair"><strong>用户顾虑</strong><p>身份证不在身边，想提交但无法完成。</p></div><div class="flow-id-evidence-pair"><strong>设计方案</strong><p>图示引导从支付宝卡包下载证件照，再上传人像面与国徽面。</p></div></div></article>
+          </div>
+          <figure class="flow-id-full-figure"><a href="assets/id-upload-optimized-v2.png" target="_blank" rel="noopener" aria-label="查看身份证上传页完整方案图"><img src="assets/id-upload-optimized-v2.png" alt="身份证上传页迭代方案：左侧为上传身份证页面，右侧为身份证照片查看与下载操作步骤" loading="lazy" width="1787" height="1747"></a><figcaption>点击查看完整原图</figcaption></figure>
+        </div>
+        <p class="flow-id-evidence-caveat">持牌资质、信息保护与平台责任等表述仍需以实际业务和合规审核为准。</p>
+      </div>
+      <div class="flow-module flow-submit-module">
+        <div class="flow-module-head"><span>03 / 重点环节-提交与联系</span><h3>信息提交页与电话拨打页</h3><p>把提交后的来电预告与真实来电连成同一段体验，让用户提前知道谁会联系、何时联系，并愿意接听。</p></div>
+        <div class="flow-contact-unified">
+          <div class="flow-contact-gallery">
+            <article class="flow-contact-visual">
+              <figure class="flow-pair-figure"><a href="assets/application-submitted-optimized.png" target="_blank" rel="noopener" aria-label="查看信息提交页方案原图"><img src="assets/application-submitted-optimized.png" alt="信息提交完成页：展示后续来电预告、服务机构、号码和流程进度" loading="lazy" width="750" height="1624"></a></figure>
+              <div class="flow-contact-copy"><small>01 / 信息提交页</small><h4>提前告知来电</h4><p>集中告知来电时间、号码、顾问与机构，让用户知道谁会联系、何时联系。</p></div>
+            </article>
+            <article class="flow-contact-visual has-call-notification">
+              <div class="flow-contact-figure-pair" aria-label="资方来电与系统来电提醒配图">
+                <figure class="flow-pair-figure"><a href="assets/lender-incoming-call-notification.png" target="_blank" rel="noopener" aria-label="查看系统来电提醒界面原图"><img src="assets/lender-incoming-call-notification.png" alt="系统来电界面：显示来电号码、短信提醒及服务机构信息" loading="lazy" width="750" height="1624"></a></figure>
+                <figure class="flow-pair-figure"><a href="assets/lender-incoming-call.png" target="_blank" rel="noopener" aria-label="查看资方拨打电话界面原图"><img src="assets/lender-incoming-call.png" alt="资方拨打电话界面：显示上海易鑫融资租赁有限公司和来电号码" loading="lazy" width="750" height="1624"></a></figure>
+              </div>
+              <div class="flow-contact-copy"><small>02 / 电话拨打页</small><h4>来电身份与预告一致</h4><p>尽量显示与提交页一致的号码和机构，并争取标记为本次申请服务方，减少骚扰电话误判。</p></div>
+            </article>
+          </div>
+          <p class="flow-contact-caveat">号码标记能力受运营商与手机系统影响，具体可实现范围需与资方核实；页面只展示可核验的真实来电信息。</p>
+        </div>
+      </div>
+      <div class="flow-module flow-safety-module">
+        <div class="flow-module-head"><span>04 / 全链路节点表达</span><h3>安全感的表达</h3><p>服务承诺全程可见，并在身份核验、证件上传和协议授权时，就近解释信息用途与服务主体。</p></div>
+        <div class="flow-module-body"><div class="flow-module-notes"><h3>结合页面节点，持续说明</h3><article><b>1 / 全流程｜服务承诺</b><p>页面顶部固定展示“压证不押车、不装 GPS、无需到店”，先讲清产品服务特点。</p></article><article><b>2 / 实名与人脸｜说明采集目的</b><p>提示身份信息依法采集、用于本次业务核验，并说明隐私保护。</p></article><article><b>3 / 证件与协议｜说明机构和用途</b><p>上传页展示合作机构资质、信息保护及本次使用范围；协议页明确机构身份与授权用途。</p></article></div><figure class="flow-safety-figure"><a href="assets/flow-safety-cross-page.png" target="_blank" rel="noopener" aria-label="查看安全感表达方案原图"><img src="assets/flow-safety-cross-page.png" alt="贯穿实名认证、身份证上传、协议确认与人脸核验页面的安全感表达方案" loading="lazy" width="3813" height="1984"></a><figcaption>关键页面的服务承诺与机构提示｜窄屏可左右滑动，点击查看原图</figcaption></figure></div>
+      </div>
+    </section>
+    <section id="content-education" class="deck-slide brand-education">
+      <div class="slide-head"><span class="section-kicker" data-audience="intent">意向用户｜场景化引导教育</span><h2>多渠道内容宣导</h2><p>通过公众号图文、视频号与短视频，持续解释车贷机制和办理预期。</p></div>
+      <div class="media-grid">
+        <div class="media-card article-card">
+          <div class="article-copy"><label>公众号：滴滴数科/滴水贷</label><b>图文宣导</b><span>问答式讲清车辆使用、资料用途、合作方与流程。</span></div>
+          <figure class="article-figure"><a href="assets/social-article-explainer.png" target="_blank" rel="noopener" aria-label="查看公众号图文解释配图原图"><img src="assets/social-article-explainer.png" alt="公众号图文解释示意：车主贷原来是这样，解释车辆使用、信息提交与办理问题" loading="lazy" width="1628" height="1641"></a><figcaption>公众号图文示意｜点击查看清晰原图</figcaption></figure>
+        </div>
+        <div class="media-card article-card">
+          <div class="article-copy"><label>视频号/小红书：滴滴数科</label><b>短视频传播</b><span>通过科普问答和场景故事，讲清产品机制与办理流程。</span></div>
+          <figure class="video-figure"><a href="assets/video-channel-reference-v2.png" target="_blank" rel="noopener" aria-label="查看视频号配图原图"><img src="assets/video-channel-reference-v2.png" alt="视频号内容示意：滴滴数科视频号主页与车主贷系列科普短视频" loading="lazy" width="1634" height="1628"></a><figcaption>视频号内容示意｜点击查看清晰原图</figcaption></figure>
+        </div>
+        <div class="video-demo"><div class="video-demo-copy"><label>宣传视频1期demo举例</label><b>20 秒快速了解车贷</b><span>短视频快速介绍（<button type="button" class="video-play-prompt" aria-label="播放车贷宣传视频">点击播放</button>）。</span></div><div class="video-frame"><video controls playsinline preload="none" poster="assets/promo-video-poster.jpg" width="1280" height="720" aria-label="20 秒车贷宣传视频"><source src="assets/promo-video-web.mp4" type="video/mp4">当前浏览器不支持视频播放。</video><p class="video-fallback" hidden>视频暂时无法播放，<a href="assets/promo-video-web.mp4" target="_blank" rel="noopener">打开视频文件</a></p></div></div>
+      </div>
+    </section>
+    <section id="offline-new" class="deck-slide">
+      <div class="slide-head">
+        <span class="section-kicker" data-audience="intent">意向用户｜场景化引导教育</span>
+        
+        <h2>资方承接流程：现状问题与优化方向</h2>
+        <p>先看中联惠捷样例，再看多资方的差异，最后评估是否需要平台统一承接。</p>
+      </div>
+      <div class="lender-case" role="group" aria-labelledby="lender-case-title">
+      <div class="lender-flow-head">
+        <div><small class="lender-case-label">01 / 单一资方案例</small><h3 id="lender-case-title">中联惠捷 · 现有承接流程样例</h3></div>
+        <p>多页面、多次核验与签署连续发生</p>
+      </div>
+      <div class="lender-scope"><strong>案例范围</strong><span>已接入中联惠捷、易鑫和小米；本节流程与六项优化仅基于已取得的中联惠捷资料。</span></div>
+      <figure class="lender-flow-figure">
+        <div class="lender-flow-scroll" tabindex="0" role="region" aria-label="中联惠捷流程全景，可左右滚动查看">
+          <a href="assets/lender-process-current-example.png" target="_blank" rel="noopener" aria-label="查看中联惠捷资方承接流程原图">
+            <img src="assets/lender-process-preview.png" width="9271" height="3795" loading="lazy" alt="中联惠捷资方承接流程拼图，包含资料上传、人脸核验、协议阅读和电子签署等页面">
+          </a>
+        </div>
+        <figcaption>连续画面中包含重复、等待和结果状态；窄屏可左右滑动，点击查看清晰原图。内部评审素材，外发前需脱敏。</figcaption>
+      </figure>
+      <div class="lender-analysis-head">
+        <h4>六项问题与对应优化</h4>
+        <span>按“现状问题 → 优化方向”逐项对应</span>
+      </div>
+      <div class="lender-pairs">
+        <article class="lender-pair">
+          <div class="lender-pair-number">01</div>
+          <div class="lender-pair-problem"><small>问题</small><h4>重复采集</h4><p>身份证上传 2 次、人脸核验 2 次。</p></div>
+          <div class="lender-pair-solution"><small>优化</small><h4>一次采集，内部复用</h4><p>各采集 1 次、资方内部复用；电话前置告知材料，帮助低意向用户判断是否继续。</p></div>
+        </article>
+        <article class="lender-pair">
+          <div class="lender-pair-number">02</div>
+          <div class="lender-pair-problem"><small>问题</small><h4>上传缺少预告</h4><p>点击上传直接打开相机，缺少提示确认。</p></div>
+          <div class="lender-pair-solution"><small>优化</small><h4>先确认，再上传</h4><p>上传前提示用途，支持取消／确认；上传后可预览、重拍。</p></div>
+        </article>
+        <article class="lender-pair">
+          <div class="lender-pair-number">03</div>
+          <div class="lender-pair-problem"><small>问题</small><h4>业务观感错位</h4><p>装饰花哨，缺乏征信业务的专业感。</p></div>
+          <div class="lender-pair-solution"><small>优化</small><h4>统一专业视觉</h4><p>使用稳重配色、精简装饰，统一主系统品牌组件。</p></div>
+        </article>
+        <article class="lender-pair">
+          <div class="lender-pair-number">04</div>
+          <div class="lender-pair-problem"><small>问题</small><h4>表单过长</h4><p>必填项集中在一个超长页面。</p></div>
+          <div class="lender-pair-solution"><small>优化</small><h4>拆成三步向导</h4><p>按“身份 → 车辆 → 业务”分步填写，明确办理进度。</p></div>
+        </article>
+        <article class="lender-pair">
+          <div class="lender-pair-number">05</div>
+          <div class="lender-pair-problem"><small>问题</small><h4>协议逐份签署</h4><p>9 份协议需逐个点击签署。</p></div>
+          <div class="lender-pair-solution"><small>优化</small><h4>分组签署，保留阅读</h4><p>协议归类分组，同组批量勾选签署，保留完整阅读。</p></div>
+        </article>
+        <article class="lender-pair">
+          <div class="lender-pair-number">06</div>
+          <div class="lender-pair-problem"><small>问题</small><h4>完成状态不清</h4><p>签署成功是否等于验车完成，用户难以判断。</p></div>
+          <div class="lender-pair-solution"><small>优化</small><h4>明确节点与进度</h4><p>说明“签署完成 ≠ 验车完成”；展示验车提交 → 审核中 → 通过 → 贷款审批。</p></div>
+        </article>
+      </div>
+      </div>
+      <div class="lender-platform-context" role="group" aria-labelledby="lender-platform-title">
+        <small>02 / 多资方情况</small>
+        <h3 id="lender-platform-title">资方流程各有要求，用户侧体验需要统一</h3>
+        <p>易鑫、小米等资方的材料、核验、签约及线下办理要求可能不同，具体差异需逐家确认。建议平台统一入口、资料说明、进度与服务口径，保留资方差异配置。</p>
+      </div>
+      <section class="lender-recommendation" aria-labelledby="lender-recommendation-title">
+        <div class="lender-recommendation-head">
+          <div><span class="lender-recommendation-label">03 / 重点建议 · 提效切入点</span><h3 id="lender-recommendation-title">从多资方各自承接，走向平台统一线上承接</h3><p>当资方数量、业务体量与用户规模达到一定阶段，可逐步建设自营型承接平台，由平台统一定义预审至终审的材料标准与提交流程，推动全程线上化、统一管控。</p></div>
+          <span class="lender-recommendation-condition">规模成熟后<br>分阶段建设</span>
+        </div>
+        <div class="lender-recommendation-impact" aria-label="复杂流程的业务影响"><b>复杂度的业务影响</b><span>用户操作负担增加</span><i aria-hidden="true">→</i><span>提交耗时、易中断</span><i aria-hidden="true">→</i><span>到达终审人数受影响</span></div>
+        <div class="lender-recommendation-flow" aria-label="平台化提效路径">
+          <div class="lender-recommendation-step"><small>01 / 统一标准</small><strong>平台定义材料</strong><span>统一预审与终审所需材料、字段及规则。</span></div>
+          <div class="lender-recommendation-step"><small>02 / 全程线上</small><strong>一次提交，按需复用</strong><span>减少重复填写、重复核验和跨端操作。</span></div>
+          <div class="lender-recommendation-step"><small>03 / 集中管控</small><strong>平台管理全链路</strong><span>统一承接流程与状态节点，持续追踪和优化。</span></div>
+        </div>
+        <div class="lender-recommendation-outcomes"><b>提效目标</b><span>降低用户操作复杂度</span><span>提升资料提交完成率</span><span>提高终审到达率</span><span>改善整体效率与收益</span></div>
+      </section>
+    </section>
+    <section id="service-scripts" class="deck-slide service-scripts">
+      <div class="slide-head">
+        <span class="section-kicker" data-audience="intent">意向用户｜场景化引导教育</span>
+        <h2>车抵贷客服话术建议｜建立统一服务口径</h2>
+        <p>围绕车抵贷申请后的资料补充、车辆核验与用户答疑，整理一套可供后续业务验证的通话结构。</p>
+      </div>
+      <div class="service-source-note" role="note" aria-label="话术建议来源说明">
+        <strong>方案来源</strong>
+        <b>当前内容是结构建议，不是车抵贷现行客服模板</b>
+        <p>目前尚未取得车抵贷线下客服的真实话术与服务流程；本页参考其他业务的线下电话模板整理结构建议，不代表车抵贷现行口径。实际机构、材料、办理步骤与合规表达，均需与真实产品及资方流程核验。</p>
+      </div>
+      <div class="service-mission">
+        <div class="service-mission-core"><span>车抵贷来电的核心任务</span><strong>建立信任</strong><i aria-hidden="true">→</i><strong>引导补充资料</strong></div>
+        <p>统一口径 · 降低投诉 · 提升资料上传完成率</p>
+      </div>
+      <div class="service-layout">
+        <div class="service-standards">
+          <h3 class="service-column-title">车抵贷沟通要点</h3>
+          <div class="service-standards-list">
+            <article class="service-standard">
+              <div class="service-standard-head"><h4>必说话术</h4><span>说明来电身份与资料安排</span></div>
+              <ul class="service-topics"><li>实际服务机构</li><li>车抵贷申请来电</li><li>车辆／证件材料</li><li>上传路径与耗时</li><li>身份核验方式</li></ul>
+            </article>
+            <article class="service-standard">
+              <div class="service-standard-head"><h4>高频问答</h4><span>回应车抵贷真实顾虑</span></div>
+              <ul class="service-topics"><li>为什么要押本</li><li>押本后是否可以继续用车</li><li>资料用途与安全</li><li>费用与还款</li><li>企微／上传问题</li><li>未接来电怎么办</li></ul>
+            </article>
+            <article class="service-standard service-standard-forbidden">
+              <div class="service-standard-head"><h4>禁止表达</h4><span>不夸大、不施压、不误导</span></div>
+              <ul class="service-topics"><li>保证额度／放款</li><li>承诺审批通过</li><li>催促提交车辆资料</li><li>模糊实际服务机构</li><li>未经确认承诺“不押车”等条件</li><li>虚称唯一办理入口</li></ul>
+            </article>
+            <article class="service-standard">
+              <div class="service-standard-head"><h4>操作引导</h4><span>陪用户完成资料提交</span></div>
+              <ol class="service-action-path"><li><b>1</b>确认现在是否方便</li><li><b>2</b>说明本次所需资料</li><li><b>3</b>按页面步骤陪同上传</li><li><b>4</b>确认提交与后续进度</li></ol>
+            </article>
+          </div>
+        </div>
+      </div>
+      <div class="service-governance"><strong>治理闭环</strong><ol><li>统一话术库</li><li>客服按规范执行</li><li>质检与问题反馈</li><li>更新话术口径</li></ol></div>
+    </section>
+    <section id="closing-page" class="deck-slide closing-slide" aria-label="总结与下一步执行计划">
+      <div class="closing-content">
+        <div class="closing-thanks">
+          <h2>Thanks</h2>
+          <div class="closing-signoff"><time datetime="2026-09">2026.09</time><span>@信贷设计团队</span></div>
+        </div>
+        <div class="closing-todos">
+          <h3>Next steps / 后续 TODO</h3>
+          <ol class="closing-actions">
+            <li><div><b>与车贷产运对齐方案</b><span>逐项确认信息准确性、业务可行性与执行条件，明确可落地内容及待补充事项。</span></div></li>
+            <li><div><b>调研线下资方服务与产品流程</b><span>走查实际办理链路、材料要求和服务触点，形成现状梳理与优化方案。</span></div></li>
+            <li><div><b>制定多媒体内容阶段规划</b><span>规划短视频与图文主题、发布节奏和阶段目标，逐步验证内容触达效果。</span></div></li>
+          </ol>
+        </div>
+      </div>
+    </section>
+  </main>
+  <header class="top"><div class="wrap"><div class="brand">车抵贷用户认知提升设计思路</div><nav class="nav" aria-label="页面导航"><a href="#overview">方案总览</a><a href="#online">线上方案</a><a href="#handoff">电话衔接</a><a href="#offline">线下方案</a><a href="#future">后续方向</a></nav></div></header>
+  <main hidden aria-hidden="true">
+    <div class="hero wrap"><span class="eyebrow">用户认知 / 设计提案</span><h1>车抵贷用户<br>认知提升设计思路</h1><p>围绕线上申请、电话衔接和线下办理，提出名称、页面、沟通与流程引导的设计想法，让用户在每一步知道自己正在办理什么、接下来会发生什么。</p><div class="meta"><span class="chip">设计方案为主</span><span class="chip">用研作为设计依据</span><span class="chip">配图位置可替换</span></div></div>
+    <section id="legacy-overview" class="overview"><div class="wrap"><h2>认知建设方案总览</h2><p class="overview-intro">从日常触达到办理完成，持续回答用户在当前环节最关心的问题。</p><figure style="margin:0" role="img" aria-label="认知建设逻辑流程：潜在用户认知、线上申请认知、电话衔接认知、线下办理认知，最终沉淀平台化标准能力"><ol class="logic"><li><div class="logic-title">潜在用户认知</div><div class="logic-touch"><span class="logic-key">触点</span>公众号 / 视频号 / 钱包内内容宣导</div><div class="logic-goal"><span class="logic-key">要建立的认知</span>车抵贷是什么、适合谁、车能否继续使用、如何辨别正规服务</div></li><li><div class="logic-title">线上申请认知</div><div class="logic-touch"><span class="logic-key">触点</span>宣导页 / 车牌页 / 实名页 / 协议页 / 提交完成页</div><div class="logic-goal"><span class="logic-key">要建立的认知</span>我正在做什么、提交后会怎样、平台与资方各做什么</div></li><li><div class="logic-title">电话衔接认知</div><div class="logic-touch"><span class="logic-key">触点</span>来电预告 / 身份说明 / 官方号码核验 / 标准话术</div><div class="logic-goal"><span class="logic-key">要建立的认知</span>谁会在何时联系我、为什么联系、如何核验真实性</div></li><li><div class="logic-title">线下办理认知</div><div class="logic-touch"><span class="logic-key">触点</span>短信 / H5或小程序进度页 / 补件引导 / 客服话术</div><div class="logic-goal"><span class="logic-key">要建立的认知</span>还差什么、为什么补、当前进度、下一步与预计时间</div></li><li><div class="logic-title">平台化标准能力</div><div class="logic-touch"><span class="logic-key">共用规则</span>流程 / 状态 / 资料规范 / 资方接入 / 服务质检</div><div class="logic-goal"><span class="logic-key">长期目标</span>不同资方承接同一套用户服务标准</div></li></ol><figcaption>图 01｜认知建设逻辑流程。电话展示的认证标识与预计时间，需以实际外呼能力为准。</figcaption></figure></div></section>
+    <section id="context"><div class="wrap"><h2 class="process-title">车贷线上线下办理流程</h2><p class="process-intro">用户在平台完成线上提交后，由电话沟通和资方后续办理共同承接服务。</p><div class="process-stack"><div class="process-row"><div class="process-stage">线上阶段<strong>线上申请</strong></div><div class="process-detail"><div><b>用户完成</b><span>填写车牌号、实名认证、签署相关协议，完成线上提交。</span></div><div><b>平台承接</b><span>接收申请并完成初步处理或匹配，向用户说明后续服务安排。</span></div></div></div><div class="process-row"><div class="process-stage">衔接阶段<strong>电话沟通</strong></div><div class="process-detail"><div><b>用户接收</b><span>接到后续服务电话，了解办理进展、所需材料和下一步安排。</span></div><div><b>资方承接</b><span>与用户建立联系，辅助用户完成后续资料补充与办理操作。</span></div></div></div><div class="process-row"><div class="process-stage">线下阶段<strong>后续办理</strong></div><div class="process-detail"><div><b>用户配合</b><span>按实际要求提交二次审核材料，跟进办理状态。</span></div><div><b>资方办理</b><span>开展后续审核、审批与放款等流程；具体要求因资方而异。</span></div></div></div></div><div class="callout">关键问题：用户看到“提交完成”时，往往还不知道是谁会联系、为什么还要提供材料、自己的车将如何处理。</div><p class="caption">注：这里的“提交完成”仅表示线上申请步骤结束，不代表最终贷款审批通过。</p></div></section>
+    <section id="research" style="padding:38px 0"><div class="wrap"><div class="panel"><div class="label">设计依据 / 用研摘要</div><h3>用户能判断产品与车辆有关，却不清楚实际办理过程</h3><p>受访用户的误解集中在是否交车、是否安装 GPS、是否需要线下验车、何时需要绿本，以及逾期处置和办理时间。这些反馈作为下文名称、页面说明与后续服务设计的依据；具体访谈原话和样本信息将在图示中补充。</p></div></div></section>
+    <section id="online"><div class="wrap"><div class="section-head"><div class="index">02 / 线上环节</div><div><h2>两类用户，两种认知触达</h2><p>有明确需求的用户沿申请路径获得解释；尚未申请的潜在用户通过日常内容逐步认识车抵贷。</p></div></div><div class="panel" style="margin-bottom:18px"><div class="label">入口名称 / 待验证方向</div><h3>将“车抵贷”改为更贴近日常语言的名称</h3><p>用研显示，用户能从“车抵贷”理解车辆与借款有关，但也会由此联想到交车、装 GPS、线下验车等与当前业务机制不符的办理方式。</p><div class="rename-map"><div class="current-name"><small>当前名称</small><b>车抵贷</b></div><div class="rename-arrow">→</div><div class="candidate-names"><div>车贷</div><div>车主贷</div><div>车主用钱</div></div></div><p class="caption">提案：对三个名称开展用户验证，比较其理解度、顾虑与继续申请意愿。</p></div><div class="branch"><div class="panel"><div class="label">A / 目标用户 · 申请路径内</div><h3>先消除“开始办理”的压力</h3><p>将测额定义为了解可贷方案的前置步骤；在每一步明确服务主体、信息用途与后续流程，再引导用户继续。</p></div><div class="panel"><div class="label">B / 潜在用户 · 日常触达</div><h3>先把品类讲明白</h3><p>利用公众号、视频号、钱包内内容等触点，解释业务是什么、适合什么场景、常见误解从何而来。</p></div></div><div class="panel" style="margin-top:18px"><div class="label">A / 页面规划</div><div class="lines"><div class="line"><b>宣导 / 入口页</b><span>从“额度与时效”扩展到“谁提供服务、车怎么安排、办理要几步”，降低用户对复杂流程和第三方服务的预期焦虑。</span></div><div class="line"><b>车牌填写页</b><span>明确这是测额或方案了解的前置步骤，而非正式贷款申请；解释车牌与个人信息的用途、保护方式与后续联系规则。</span></div><div class="line"><b>实名认证与协议页</b><span>用易懂的语言说明实名和授权的目的、信息去向以及用户需要确认的关键内容。</span></div><div class="line"><b>提交完成页</b><span>明确“线上部分已完成”，预告后续联系方、联系目的、预计时间和身份核验方式，并提供进度入口。</span></div></div></div><div class="two" style="margin-top:12px"><div class="placeholder"><div><strong>配图位置 02｜目标用户关键页面</strong>入口页、车牌页、实名页与提交完成页的前后对比。</div></div><div class="placeholder"><div><strong>配图位置 03｜潜在用户宣导内容</strong>公众号、视频号、钱包入口的内容样例。</div></div></div><p class="caption">待后续用研材料补充：访谈原话、名称测试结果与高频顾虑的证据。</p></div></section>
+    <section id="handoff"><div class="wrap"><div class="section-head"><div class="index">03 / 电话衔接</div><div><h2>让用户敢接，也知道接了要谈什么</h2><p>这是线上到线下的交接点。来电前、来电时、来电后应使用同一套身份与流程信息。</p></div></div><div class="panel"><div class="journey"><div class="round">前</div><div><h3>提前预告</h3><p>在提交完成页及通知中说明预计联系时间、联系方名称、来电目的与官方核验入口。具体号码和时间需要与实际外呼能力一致。</p></div></div><div class="journey"><div class="round">中</div><div><h3>先说明身份，再进入办理</h3><p>统一电话开场，说明申请来源、所属机构及本次沟通目的；把材料、车辆安排和后续步骤讲清楚。</p></div></div><div class="journey"><div class="round">后</div><div><h3>留下可回看的确认信息</h3><p>通过短信或站内消息同步沟通结果、下一步所需材料与查询方式，降低用户记不住、找不到的成本。</p></div></div></div><div class="callout">接听界面的“官方认证”可以作为目标，但需要先核实外呼号码、运营商或手机系统的展示能力；页面上承诺的身份信息必须能被用户实际核验。</div><div class="placeholder" style="margin-top:22px"><div><strong>配图位置 04｜电话交接示意</strong>提交完成页 → 来电预告 → 接听页 → 通话后确认消息。</div></div></div></section>
+    <section id="offline"><div class="wrap"><div class="section-head"><div class="index">04 / 线下环节</div><div><h2>先把现有资方流程讲清楚</h2><p>资方在材料收集、补件、审核方式上存在差异。本阶段聚焦能够共同执行的通知表达、流程说明和服务规范。</p></div></div><div class="two"><div class="panel"><div class="label">A / 短信与客服话术</div><h3>统一关键信息的说法</h3><p>每次触达都回答“谁在联系、现在到哪一步、需要做什么、为什么需要、如何核验”。梳理可落地的短信模板、客服话术与异常情况说明。</p></div><div class="panel"><div class="label">B / 流程引导与信息提报</div><h3>把复杂步骤解释给用户</h3><p>整理既有资方流程，找出重复提交、补件不明和状态中断的位置；针对 H5、小程序等承载方式，提供资料清单、上传说明和进度反馈。</p></div></div><div class="placeholder" style="margin-top:18px"><div><strong>配图位置 05｜既有资方流程对照</strong>后续展示不同资方的材料、审核、通知与放款环节，并标出可统一的用户侧节点。</div></div><p class="caption">待业务核对：资方流程、实际短信模板、客服电话话术、资料提报入口及合规要求。</p></div></section>
+    <section id="future"><div class="wrap"><div class="section-head"><div class="index">05 / 后续方向</div><div><h2>从统一表达，走向统一的用户流程</h2><p>现阶段先在关键触点减少理解落差；当业务规模扩大，再逐步由平台定义共用的用户侧规则。</p></div></div><div class="direction"><b>近期可落地</b><p>完善线上关键页面、来电预告、短信模板和客服话术；梳理资方现状，明确哪些信息必须一致。</p></div><div class="direction"><b>中期逐步建设</b><p>沉淀资方名称、办理状态、资料清单、核验方式等共用字段，让用户能在平台看到后续进展。</p></div><div class="direction"><b>长期产品方向</b><p>平台侧形成统一的申请与信息提报流程，资方按规则承接；各资方的审批要求可以不同，但用户面对的说明与进度保持连续。</p></div></div></section>
+    <section class="end"><div class="wrap"><blockquote>认知建设贯穿整个办理过程：线上讲清楚，电话接得住，线下跟得上。</blockquote><p>此版为信息结构草稿。用研结论、业务数据、现有界面和资方流程图将在收到材料后补入。</p></div></section>
+  </main>
+<script>
+  (function () {
+    function ensureSectionSubtitle(scopeSelector, afterSelector, text) {
+      var scope = document.querySelector(scopeSelector);
+      if (!scope || scope.querySelector('.section-subtitle')) {
+        return;
+      }
+      var target = scope.querySelector(afterSelector);
+      if (!target) {
+        return;
+      }
+      var subtitle = document.createElement('p');
+      subtitle.className = 'section-subtitle';
+      subtitle.textContent = text;
+      target.insertAdjacentElement('afterend', subtitle);
+    }
+    ensureSectionSubtitle(
+      '.new-deck .naming-segment',
+      '.naming-title',
+      '从用户顾虑与竞品命名对照出发，减少“抵押”带来的复杂流程联想。'
+    );
+    ensureSectionSubtitle(
+      '.new-deck .promo-section .slide-head',
+      'h2',
+      '结合用户画像、入口卡片测试和历史实验，探索更直接、清晰、低压的视觉表达。'
+    );
+    var overviewSubtitle = document.querySelector('.new-deck #overview .overview-subtitle');
+    if (overviewSubtitle) {
+      overviewSubtitle.innerHTML = '<span>面向潜在用户，依托滴滴产品场景，建立车抵贷产品基础认知；</span><span>面向意向用户，覆盖线上申请、电话承接、线下办理全链路，完成全流程产品教育。</span>';
+    }
+    var promoSection = document.querySelector('.new-deck .promo-section');
+    if (promoSection) {
+      var promoNotes = promoSection.querySelector('.promo-notes');
+      var personaCard = promoNotes && promoNotes.querySelector('.persona-card');
+      var testCard = promoNotes && promoNotes.querySelector('.test-card');
+      var visualDirection = promoNotes && promoNotes.querySelector('.visual-direction');
+      if (promoNotes && personaCard && testCard && visualDirection && !promoNotes.querySelector('.promo-evidence-stack')) {
+        var evidenceStack = document.createElement('div');
+        evidenceStack.className = 'promo-evidence-stack';
+        var evidenceGroupHead = document.createElement('div');
+        evidenceGroupHead.className = 'evidence-group-head';
+        evidenceGroupHead.innerHTML = '<b>用户画像与历史实验</b><span>作为视觉方向的论据</span>';
+        promoNotes.insertBefore(evidenceStack, personaCard);
+        evidenceStack.appendChild(evidenceGroupHead);
+        evidenceStack.appendChild(personaCard);
+        evidenceStack.appendChild(testCard);
+        visualDirection.classList.add('visual-conclusion');
+        visualDirection.innerHTML = '<span class="promo-note-label">视觉结论</span><h3>橙黄色体系替换绿色体系</h3><p>在保持信息清晰的前提下，将原有绿色功能感转为更醒目、统一、偏转化导向的金橙色表达。</p><div class="visual-systems"><div class="visual-system old"><small>旧 · 绿色系</small><b>功能感强</b><span>利益氛围较弱</span></div><i>→</i><div class="visual-system new"><small>新 · 金橙系</small><b>醒目、统一</b><span>强化转化导向</span></div></div><div class="visual-palette" aria-label="金橙色视觉体系色板"><span></span><span></span><span></span><span></span></div><p class="visual-conclusion-foot">关键行动与“评估额度”等按钮使用金橙色，最终仍需以品牌规范核对。</p>';
+      }
+      if (personaCard) {
+        var personaNote = personaCard.querySelector('.persona-note');
+        var personaBehavior = personaCard.querySelector('.persona-behavior');
+        if (personaBehavior) {
+          personaBehavior.remove();
+        }
+        if (personaNote) {
+          personaNote.textContent = '画像提示：表达应直接易理解、突出费用与时间预期、价格敏感、利益导向明显、入口识别更依赖醒目颜色';
+        }
+      }
+      if (testCard && !testCard.querySelector('.test-insight')) {
+        var testCaption = testCard.querySelector('.test-figure figcaption');
+        if (testCaption) {
+          testCaption.remove();
+        }
+        var testInsight = document.createElement('div');
+        testInsight.className = 'test-insight';
+        testInsight.innerHTML = '<b>测试结论</b><span>金橘色更适合作为下沉用户入口和转化链路的主色</span>';
+        var testFigure = testCard.querySelector('.test-figure');
+        if (testFigure) {
+          testFigure.insertAdjacentElement('afterend', testInsight);
+        } else {
+          testCard.appendChild(testInsight);
+        }
+      }
+    }
+    var promoSolution = promoSection && promoSection.querySelector('.promo-solution');
+    if (promoSection && promoSolution && !document.querySelector('.new-deck .promo-solution-card')) {
+      var promoSolutionIntro = promoSolution.querySelector('.promo-solution-title p');
+      if (promoSolutionIntro) {
+        promoSolutionIntro.textContent = '在用户首页来到的产品宣导页中增加视频、图文和问答式说明，讲清车贷的办理流程、借款流程与服务方式。';
+      }
+      var promoHeading = promoSolution.querySelector('.promo-heading');
+      if (promoHeading) {
+        promoHeading.remove();
+      }
+      var solutionCard = document.createElement('section');
+      solutionCard.className = 'deck-slide promo-solution-card';
+      var solutionLabel = document.createElement('span');
+      solutionLabel.className = 'section-kicker'; solutionLabel.dataset.audience = 'intent';
+      solutionLabel.textContent = '意向用户｜场景化引导教育';
+      promoSolution.insertBefore(solutionLabel, promoSolution.firstChild);
+      solutionCard.appendChild(promoSolution);
+      promoSection.insertAdjacentElement('afterend', solutionCard);
+    }
+  })();
+  document.querySelectorAll('.competitor-type').forEach(function (card) {
+    var text = card.textContent.replace(/\s+/g, '');
+    if (text.includes('度小满') && text.includes('有钱花')) card.remove();
+    if (text.includes('携程金融') && text.includes('借去花')) card.remove();
+  });
+  document.querySelectorAll('.new-deck .brand-education .article-figure figcaption, .new-deck .brand-education .video-figure figcaption').forEach(function (caption) {
+    caption.remove();
+  });
+  // 卡片标题随内容增长，桌面共用实际测量高度，手机恢复自然高度。
+  (function () {
+    var grid = document.querySelector('.brand-education .media-grid');
+    function alignMediaHeadings() {
+      if (!grid) return;
+      grid.style.removeProperty('--media-copy-height');
+      if (window.innerWidth <= 900) return;
+      var headings = grid.querySelectorAll('.article-copy, .video-demo-copy');
+      var height = 118;
+      headings.forEach(function (heading) {height = Math.max(height, heading.getBoundingClientRect().height);});
+      grid.style.setProperty('--media-copy-height', Math.ceil(height) + 'px');
+    }
+    function alignEntryHeadings() {
+      var cards = document.querySelectorAll('.entry-stack-item');
+      cards.forEach(function (card) {card.style.removeProperty('--entry-head-height');});
+      if (window.innerWidth <= 800) return;
+      var rows = {};
+      cards.forEach(function (card) {
+        var row = Math.round(card.getBoundingClientRect().top);
+        if (!rows[row]) rows[row] = [];
+        rows[row].push(card);
+      });
+      Object.keys(rows).forEach(function (key) {
+        var row = rows[key];
+        var height = Math.max.apply(null, row.map(function (card) {return card.querySelector('.entry-stack-head').getBoundingClientRect().height;}));
+        row.forEach(function (card) {card.style.setProperty('--entry-head-height', Math.ceil(height) + 'px');});
+      });
+    }
+    function alignHeaders() {alignMediaHeadings();alignEntryHeadings();}
+    window.addEventListener('resize', alignHeaders);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(alignHeaders);
+    alignHeaders();
+    document.querySelectorAll('.lender-flow-scroll, .flow-current>a, .flow-safety-figure>a').forEach(function (scroller) {
+      scroller.addEventListener('keydown', function (event) {
+        if (event.target !== scroller || (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight')) return;
+        if (scroller.scrollWidth <= scroller.clientWidth) return;
+        event.preventDefault();
+        scroller.scrollLeft += event.key === 'ArrowRight' ? 120 : -120;
+      });
+    });
+    var video = document.querySelector('.video-demo video');
+    if (video) {
+      function showVideoFallback() {
+        var help = document.querySelector('.video-fallback');
+        if (help) help.hidden = false;
+      }
+      video.addEventListener('error', showVideoFallback);
+      video.querySelectorAll('source').forEach(function (source) {source.addEventListener('error', showVideoFallback);});
+      var playPrompt = document.querySelector('.video-play-prompt');
+      if (playPrompt) {
+        playPrompt.addEventListener('click', function () {
+          var playback = video.play();
+          if (playback && typeof playback.catch === 'function') playback.catch(showVideoFallback);
+        });
+      }
+    }
+  })();
+  // Keep the in-page chapter index aligned with scrolling and native hash navigation.
+  (function () {
+    var header = document.querySelector('.report-header');
+    if (!header) return;
+    var nav = header.querySelector('nav');
+    var links = Array.from(nav.querySelectorAll('a[href^="#"]'));
+    var chapters = links.map(function (link) {
+      var target = document.getElementById(link.hash.slice(1));
+      if (target) target.setAttribute('tabindex', '-1');
+      return {link:link, target:target};
+    }).filter(function (chapter) {return chapter.target;});
+    var current = null;
+    var queued = false;
+    function update() {
+      queued = false;
+      var headerHeight = Math.ceil(header.getBoundingClientRect().height);
+      header.dataset.navOverflow = String(nav.scrollWidth > nav.clientWidth + 1);
+      document.documentElement.style.setProperty('--report-anchor-offset', (headerHeight + 20) + 'px');
+      var active = null;
+      chapters.forEach(function (chapter) {
+        if (chapter.target.getBoundingClientRect().top <= headerHeight + 32) active = chapter.link;
+      });
+      var pageHeight = (document.scrollingElement || document.documentElement).scrollHeight;
+      if (chapters.length && window.scrollY > 0 && window.scrollY + window.innerHeight >= pageHeight - 2) {
+        active = chapters[chapters.length - 1].link;
+      }
+      if (active === current) return;
+      current = active;
+      links.forEach(function (link) {
+        if (link === active) link.setAttribute('aria-current', 'location');
+        else link.removeAttribute('aria-current');
+      });
+      if (active) {
+        var bounds = nav.getBoundingClientRect();
+        var item = active.getBoundingClientRect();
+        if (item.left < bounds.left || item.right > bounds.right) {
+          nav.scrollLeft += item.left - bounds.left - (bounds.width - item.width) / 2;
+        }
+      }
+    }
+    function schedule() {
+      if (!queued) {queued = true; requestAnimationFrame(update);}
+    }
+    window.addEventListener('scroll', schedule, {passive:true});
+    window.addEventListener('resize', schedule);
+    window.addEventListener('hashchange', schedule);
+    window.addEventListener('load', schedule);
+    if (window.ResizeObserver) {
+      var observer = new ResizeObserver(schedule);
+      observer.observe(header);
+      observer.observe(document.querySelector('.new-deck'));
+    }
+    update();
+  })();
+</script>
+</body>
+</html>
